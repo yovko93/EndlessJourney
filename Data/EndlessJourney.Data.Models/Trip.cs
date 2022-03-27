@@ -22,10 +22,8 @@
 
         public int? Discount { get; set; }
 
-        public int CityId { get; set; }
-
-        public City City { get; set; }
-
+        // public int CityId { get; set; }
+        // public City City { get; set; }
         public int DestinationId { get; set; }
 
         public Destination Destination { get; set; }

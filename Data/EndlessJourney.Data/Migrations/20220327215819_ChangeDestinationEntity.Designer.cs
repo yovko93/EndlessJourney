@@ -4,14 +4,16 @@ using EndlessJourney.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EndlessJourney.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220327215819_ChangeDestinationEntity")]
+    partial class ChangeDestinationEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -295,9 +297,6 @@ namespace EndlessJourney.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CityId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
@@ -323,8 +322,6 @@ namespace EndlessJourney.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CityId");
 
                     b.HasIndex("EndPointId");
 
@@ -693,10 +690,6 @@ namespace EndlessJourney.Data.Migrations
 
             modelBuilder.Entity("EndlessJourney.Data.Models.Destination", b =>
                 {
-                    b.HasOne("EndlessJourney.Data.Models.City", null)
-                        .WithMany("Destinations")
-                        .HasForeignKey("CityId");
-
                     b.HasOne("EndlessJourney.Data.Models.City", "EndPoint")
                         .WithMany()
                         .HasForeignKey("EndPointId")
@@ -852,11 +845,6 @@ namespace EndlessJourney.Data.Migrations
             modelBuilder.Entity("EndlessJourney.Data.Models.Benefit", b =>
                 {
                     b.Navigation("Rooms");
-                });
-
-            modelBuilder.Entity("EndlessJourney.Data.Models.City", b =>
-                {
-                    b.Navigation("Destinations");
                 });
 
             modelBuilder.Entity("EndlessJourney.Data.Models.Country", b =>

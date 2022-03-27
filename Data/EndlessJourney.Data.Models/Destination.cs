@@ -15,9 +15,13 @@
 
         public string Description { get; set; }
 
-        public int CityId { get; set; }
+        public int StartPointId { get; set; }
 
-        public City City { get; set; }
+        public City StartPoint { get; set; }
+
+        public int EndPointId { get; set; }
+
+        public City EndPoint { get; set; }
 
         public ICollection<Trip> Trips { get; set; }
     }

@@ -96,6 +96,18 @@
             builder
                 .Entity<RoomBenefit>()
                 .HasKey(rb => new { rb.RoomId, rb.BenefitId });
+
+            builder
+               .Entity<Destination>()
+               .HasOne(d => d.StartPoint)
+               .WithMany()
+               .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .Entity<Destination>()
+                .HasOne(d => d.EndPoint)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Restrict);
         }
 
         private static void SetIsDeletedQueryFilter<T>(ModelBuilder builder)
