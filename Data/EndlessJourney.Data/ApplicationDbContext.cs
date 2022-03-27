@@ -26,6 +26,26 @@
 
         public DbSet<Setting> Settings { get; set; }
 
+        public DbSet<Benefit> Benefits { get; set; }
+
+        public DbSet<Booking> Bookings { get; set; }
+
+        public DbSet<City> Cities { get; set; }
+
+        public DbSet<Country> Countries { get; set; }
+
+        public DbSet<Destination> Destinations { get; set; }
+
+        public DbSet<Image> Images { get; set; }
+
+        public DbSet<Room> Rooms { get; set; }
+
+        public DbSet<RoomBenefit> RoomBenefits { get; set; }
+
+        public DbSet<Ship> Ships { get; set; }
+
+        public DbSet<Trip> Trips { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
@@ -72,6 +92,10 @@
             {
                 foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
             }
+
+            builder
+                .Entity<RoomBenefit>()
+                .HasKey(rb => new { rb.RoomId, rb.BenefitId });
         }
 
         private static void SetIsDeletedQueryFilter<T>(ModelBuilder builder)
