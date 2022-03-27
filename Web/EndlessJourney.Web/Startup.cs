@@ -55,6 +55,8 @@
             services.AddRazorPages();
             services.AddDatabaseDeveloperPageExceptionFilter();
 
+            services.AddSwaggerGen();
+
             services.AddSingleton(this.configuration);
 
             // Data repositories
@@ -82,6 +84,12 @@
 
             if (env.IsDevelopment())
             {
+                app.UseSwagger();
+                app.UseSwaggerUI(options =>
+                {
+                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+                    options.RoutePrefix = string.Empty;
+                });
                 app.UseDeveloperExceptionPage();
                 app.UseMigrationsEndPoint();
             }
