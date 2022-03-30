@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EndlessJourney.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220327215819_ChangeDestinationEntity")]
-    partial class ChangeDestinationEntity
+    [Migration("20220330101127_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

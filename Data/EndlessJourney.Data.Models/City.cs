@@ -9,7 +9,7 @@
         public City()
         {
             // this.Trips = new HashSet<Trip>();
-            this.Destinations = new HashSet<Destination>();
+            //this.Destinations = new HashSet<Destination>();
         }
 
         public string Name { get; set; }
@@ -19,6 +19,6 @@
         public Country Country { get; set; }
 
         // public ICollection<Trip> Trips { get; set; }
-        public ICollection<Destination> Destinations { get; set; }
+        //public ICollection<Destination> Destinations { get; set; }
     }
 }

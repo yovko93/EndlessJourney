@@ -248,7 +248,8 @@ namespace EndlessJourney.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CityId = table.Column<int>(type: "int", nullable: false),
+                    StartPointId = table.Column<int>(type: "int", nullable: false),
+                    EndPointId = table.Column<int>(type: "int", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
@@ -258,8 +259,14 @@ namespace EndlessJourney.Data.Migrations
                 {
                     table.PrimaryKey("PK_Destinations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Destinations_Cities_CityId",
-                        column: x => x.CityId,
+                        name: "FK_Destinations_Cities_EndPointId",
+                        column: x => x.EndPointId,
+                        principalTable: "Cities",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Destinations_Cities_StartPointId",
+                        column: x => x.StartPointId,
                         principalTable: "Cities",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -301,7 +308,6 @@ namespace EndlessJourney.Data.Migrations
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Discount = table.Column<int>(type: "int", nullable: true),
-                    CityId = table.Column<int>(type: "int", nullable: false),
                     DestinationId = table.Column<int>(type: "int", nullable: false),
                     ShipId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
@@ -317,12 +323,6 @@ namespace EndlessJourney.Data.Migrations
                         name: "FK_Trips_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Trips_Cities_CityId",
-                        column: x => x.CityId,
-                        principalTable: "Cities",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -522,14 +522,19 @@ namespace EndlessJourney.Data.Migrations
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Destinations_CityId",
+                name: "IX_Destinations_EndPointId",
                 table: "Destinations",
-                column: "CityId");
+                column: "EndPointId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Destinations_IsDeleted",
                 table: "Destinations",
                 column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Destinations_StartPointId",
+                table: "Destinations",
+                column: "StartPointId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Images_IsDeleted",
@@ -575,11 +580,6 @@ namespace EndlessJourney.Data.Migrations
                 name: "IX_Ships_IsDeleted",
                 table: "Ships",
                 column: "IsDeleted");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Trips_CityId",
-                table: "Trips",
-                column: "CityId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Trips_DestinationId",
