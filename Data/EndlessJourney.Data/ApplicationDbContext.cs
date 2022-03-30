@@ -44,6 +44,8 @@
 
         public DbSet<Ship> Ships { get; set; }
 
+        public DbSet<ShipRoom> ShipRooms { get; set; }
+
         public DbSet<Trip> Trips { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
@@ -96,6 +98,10 @@
             builder
                 .Entity<RoomBenefit>()
                 .HasKey(rb => new { rb.RoomId, rb.BenefitId });
+
+            builder
+                .Entity<ShipRoom>()
+                .HasKey(sr => new { sr.ShipId, sr.RoomId });
 
             builder
                .Entity<Destination>()

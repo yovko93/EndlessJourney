@@ -9,7 +9,7 @@
         public Ship()
         {
             this.Trips = new HashSet<Trip>();
-            this.Rooms = new HashSet<Room>();
+            this.Rooms = new HashSet<ShipRoom>();
         }
 
         public string Name { get; set; }
@@ -25,6 +25,6 @@
         // public bool IsAvailable { get; set; }
         public ICollection<Trip> Trips { get; set; }
 
-        public ICollection<Room> Rooms { get; set; }
+        public ICollection<ShipRoom> Rooms { get; set; }
     }
 }
