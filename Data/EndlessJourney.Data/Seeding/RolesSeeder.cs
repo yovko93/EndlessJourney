@@ -4,11 +4,12 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using EndlessJourney.Common;
     using EndlessJourney.Data.Models;
 
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.DependencyInjection;
+
+    using static EndlessJourney.Common.GlobalConstants.RolesNamesConstants;
 
     internal class RolesSeeder : ISeeder
     {
@@ -16,7 +17,7 @@
         {
             var roleManager = serviceProvider.GetRequiredService<RoleManager<ApplicationRole>>();
 
-            await SeedRoleAsync(roleManager, GlobalConstants.AdministratorRoleName);
+            await SeedRoleAsync(roleManager, AdministratorRoleName);
         }
 
         private static async Task SeedRoleAsync(RoleManager<ApplicationRole> roleManager, string roleName)

@@ -6,7 +6,9 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+    using static EndlessJourney.Common.GlobalConstants.RolesNamesConstants;
+
+    [Authorize(Roles = AdministratorRoleName)]
     [Area("Administration")]
     public class AdministrationController : BaseController
     {

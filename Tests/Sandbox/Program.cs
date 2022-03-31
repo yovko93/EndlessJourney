@@ -5,6 +5,7 @@
     using System.IO;
     using System.Threading.Tasks;
 
+    using CommandLine;
     using EndlessJourney.Data;
     using EndlessJourney.Data.Common;
     using EndlessJourney.Data.Common.Repositories;
@@ -13,9 +14,6 @@
     using EndlessJourney.Data.Seeding;
     using EndlessJourney.Services.Data;
     using EndlessJourney.Services.Messaging;
-
-    using CommandLine;
-
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;

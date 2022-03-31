@@ -4,6 +4,9 @@
     {
         public const string SystemName = "EndlessJourney";
 
-        public const string AdministratorRoleName = "Administrator";
+        public class RolesNamesConstants
+        {
+            public const string AdministratorRoleName = "Administrator";
+        }
     }
 }

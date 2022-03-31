@@ -1,9 +1,8 @@
 ﻿namespace EndlessJourney.Web.ViewModels.Settings
 {
+    using AutoMapper;
     using EndlessJourney.Data.Models;
     using EndlessJourney.Services.Mapping;
-
-    using AutoMapper;
 
     public class SettingViewModel : IMapFrom<Setting>, IHaveCustomMappings
     {
