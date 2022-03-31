@@ -15,7 +15,7 @@
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
             this.Bookings = new HashSet<Booking>();
-            this.Trips = new HashSet<Trip>();
+            this.Trips = new HashSet<UserTrip>();
         }
 
         public string FirstName { get; set; }
@@ -36,7 +36,7 @@
 
         public virtual ICollection<Booking> Bookings { get; set; }
 
-        public virtual ICollection<Trip> Trips { get; set; }
+        public virtual ICollection<UserTrip> Trips { get; set; }
 
         public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
 

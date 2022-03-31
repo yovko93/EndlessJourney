@@ -48,6 +48,8 @@
 
         public DbSet<Trip> Trips { get; set; }
 
+        public DbSet<UserTrip> UserTrips { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
@@ -102,6 +104,10 @@
             builder
                 .Entity<ShipRoom>()
                 .HasKey(sr => new { sr.ShipId, sr.RoomId });
+
+            builder
+               .Entity<UserTrip>()
+               .HasKey(ut => new { ut.UserId, ut.TripId });
 
             builder
                .Entity<Destination>()

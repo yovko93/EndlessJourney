@@ -12,6 +12,7 @@
             this.Id = Guid.NewGuid().ToString();
             this.Bookings = new HashSet<Booking>();
             this.Images = new HashSet<Image>();
+            this.Users = new HashSet<UserTrip>();
         }
 
         public DateTime StartDate { get; set; }
@@ -22,8 +23,6 @@
 
         public int? Discount { get; set; }
 
-        // public int CityId { get; set; }
-        // public City City { get; set; }
         public int DestinationId { get; set; }
 
         public Destination Destination { get; set; }
@@ -32,9 +31,7 @@
 
         public Ship Ship { get; set; }
 
-        public string UserId { get; set; }
-
-        public ApplicationUser User { get; set; }
+        public ICollection<UserTrip> Users { get; set; }
 
         public ICollection<Booking> Bookings { get; set; }
 

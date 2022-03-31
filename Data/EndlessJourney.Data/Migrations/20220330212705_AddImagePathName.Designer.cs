@@ -4,14 +4,16 @@ using EndlessJourney.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EndlessJourney.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220330212705_AddImagePathName")]
+    partial class AddImagePathName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -567,6 +569,9 @@ namespace EndlessJourney.Data.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("DestinationId");
@@ -575,30 +580,9 @@ namespace EndlessJourney.Data.Migrations
 
                     b.HasIndex("ShipId");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Trips");
-                });
-
-            modelBuilder.Entity("EndlessJourney.Data.Models.UserTrip", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("TripId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.HasKey("UserId", "TripId");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.HasIndex("TripId");
-
-                    b.ToTable("UserTrips");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -818,26 +802,13 @@ namespace EndlessJourney.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("EndlessJourney.Data.Models.ApplicationUser", "User")
+                        .WithMany("Trips")
+                        .HasForeignKey("UserId");
+
                     b.Navigation("Destination");
 
                     b.Navigation("Ship");
-                });
-
-            modelBuilder.Entity("EndlessJourney.Data.Models.UserTrip", b =>
-                {
-                    b.HasOne("EndlessJourney.Data.Models.Trip", "Trip")
-                        .WithMany("Users")
-                        .HasForeignKey("TripId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EndlessJourney.Data.Models.ApplicationUser", "User")
-                        .WithMany("Trips")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Trip");
 
                     b.Navigation("User");
                 });
@@ -940,8 +911,6 @@ namespace EndlessJourney.Data.Migrations
                     b.Navigation("Bookings");
 
                     b.Navigation("Images");
-
-                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }
