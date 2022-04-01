@@ -23,18 +23,21 @@
                 new Destination
                 {
                     Name = "Western Mediterranean",
+                    Description = "The enchanting old town of Dalt Vila in Ibiza and Rome’s historic centre (from Civitavecchia) are two of the standout sights to savour on this {0}-night voyage, sailing from Southampton.",
                     StartPointId = 8,
                     EndPointId = 13,
                 },
                 new Destination
                 {
                     Name = "Eastbound Transatlantic Crossing",
+                    Description = "Witness New York’s skyscrapers fade into the horizon and savour exquisite fine dining, music and theatre each day, as you embark on this iconic Transatlantic Crossing to Southampton.",
                     StartPointId = 7,
                     EndPointId = 8,
                 },
                 new Destination
                 {
                     Name = "Roundtrip Transatlantic",
+                    Description = "Pack as much as you please for this {0}-night Transatlantic Crossing. Enjoy the convenience of sailing roundtrip from New York and the chance to explore Southampton – a favourite city of Jane Austen.",
                     StartPointId = 7,
                     EndPointId = 7,
                 },
@@ -48,12 +51,14 @@
                 new Destination
                 {
                     Name = "Hamburg Short Break",
+                    Description = "Savour a relaxing sea days on the boat, and be treated to special Royal Shakespeare Company performances on board, before disembarking to explore Hamburg’s canals, museums, and old town.",
                     StartPointId = 16,
                     EndPointId = 14,
                 },
                 new Destination
                 {
                     Name = "Dubai To Sydney",
+                    Description = "Thailand’s palm-fringed beaches, Malaysia’s fiery curries and the historic city of Hue (from Chan May) await discovery on this voyage which offers overnight calls in Hong Kong and Singapore.",
                     StartPointId = 19,
                     EndPointId = 18,
                 },
