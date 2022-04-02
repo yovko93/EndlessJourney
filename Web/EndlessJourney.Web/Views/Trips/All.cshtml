@@ -1,0 +1,23 @@
+﻿@model EndlessJourney.Web.ViewModels.Trips.TripsListViewModel
+@{
+    this.ViewData["Title"] = "All Trips, page " + Model.PageNumber;
+}
+
+@*TODO remove*@
+@if (this.TempData.ContainsKey("Message"))
+{
+<div class="alert alert-success">@this.TempData["Message"]</div>}
+
+<h1>@this.ViewData["Title"]</h1>
+<hr />
+<div class="row">
+    @foreach (var trip in this.Model.Trips)
+    {
+<div class="media col-md-4">
+    <img src="@trip.ImageUrl" width="100" class="mr-3 img-responsive">
+    <div class="media-body">
+        <h5 class="mt-0"><a asp-action="ById" asp-route-id="@trip.Id">Edit</a></h5>
+    </div>
+</div>}
+</div>
+<hr />

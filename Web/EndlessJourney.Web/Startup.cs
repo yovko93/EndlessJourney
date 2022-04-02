@@ -9,6 +9,7 @@
     using EndlessJourney.Data.Repositories;
     using EndlessJourney.Data.Seeding;
     using EndlessJourney.Services.Data;
+    using EndlessJourney.Services.Data.Trips;
     using EndlessJourney.Services.Mapping;
     using EndlessJourney.Services.Messaging;
     using EndlessJourney.Web.ViewModels;
@@ -21,6 +22,7 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using Microsoft.OpenApi.Models;
 
     public class Startup
     {
@@ -55,7 +57,10 @@
             services.AddRazorPages();
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddSwaggerGen();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v2", new OpenApiInfo { Title = "MVCCallWebAPI", Version = "v2" });
+            });
 
             services.AddSingleton(this.configuration);
 
@@ -67,6 +72,7 @@
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
+            services.AddTransient<ITripsService, TripsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -82,14 +88,14 @@
                 new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
             }
 
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v2/swagger.json", "MVCCallWebAPI");
+            });
+
             if (env.IsDevelopment())
             {
-                app.UseSwagger();
-                app.UseSwaggerUI(options =>
-                {
-                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
-                    options.RoutePrefix = string.Empty;
-                });
                 app.UseDeveloperExceptionPage();
                 app.UseMigrationsEndPoint();
             }

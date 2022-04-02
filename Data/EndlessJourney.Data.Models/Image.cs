@@ -10,6 +10,8 @@
 
         public string PathName { get; set; }
 
+        public string ImageUrl { get; set; }
+
         public string Extension { get; set; }
     }
 }
