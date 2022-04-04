@@ -1,6 +1,6 @@
 ﻿namespace EndlessJourney.Web.ViewModels.Trips
 {
-    public class UpdateTripInputModel : BaseTripInputModel
+    public class EditTripInputModel : BaseTripInputModel
     {
         public string Id { get; set; }
     }

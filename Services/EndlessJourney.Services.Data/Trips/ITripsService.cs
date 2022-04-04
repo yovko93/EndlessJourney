@@ -9,13 +9,13 @@
     {
         Task CreateAsync(CreateTripInputModel tripModel, string imagePath);
 
-        Task UpdateAsync(string id, UpdateTripInputModel tripModel);
+        Task UpdateAsync(string id, EditTripInputModel tripModel);
 
         Task<TModel> GetByIdAsync<TModel>(string id);
 
         Task<IEnumerable<TModel>> GetAllAsync<TModel>();
 
-        int GetCount();
+        Task<int> GetCountAsync();
 
         Task<IEnumerable<TModel>> GetRandomAsync<TModel>(int count);
 

@@ -88,10 +88,10 @@
                 .To<TModel>()
                 .FirstOrDefaultAsync();
 
-        public int GetCount()
-           => this.tripsRepository
+        public async Task<int> GetCountAsync()
+           => await this.tripsRepository
                .AllAsNoTracking()
-               .Count();
+               .CountAsync();
 
         public async Task<IEnumerable<TModel>> GetRandomAsync<TModel>(int count)
         {
@@ -103,7 +103,7 @@
                 .ToListAsync();
         }
 
-        public async Task UpdateAsync(string id, UpdateTripInputModel tripModel)
+        public async Task UpdateAsync(string id, EditTripInputModel tripModel)
         {
             var trip = this.tripsRepository
                 .All()
