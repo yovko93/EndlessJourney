@@ -18,8 +18,6 @@
 
         public int Stars { get; set; }
 
-        // public int ShipId { get; set; }
-        // public Ship Ship { get; set; }
         public ICollection<ShipRoom> Ships { get; set; }
 
         public ICollection<RoomBenefit> Benefits { get; set; }
