@@ -24,8 +24,6 @@
         {
         }
 
-        public DbSet<Setting> Settings { get; set; }
-
         public DbSet<Benefit> Benefits { get; set; }
 
         public DbSet<Booking> Bookings { get; set; }

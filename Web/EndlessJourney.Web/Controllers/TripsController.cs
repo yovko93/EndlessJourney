@@ -16,7 +16,6 @@
         private readonly ITripsService tripsService;
         private readonly IWebHostEnvironment environment;
 
-
         public TripsController(
             ITripsService tripsService,
             IWebHostEnvironment environment)
