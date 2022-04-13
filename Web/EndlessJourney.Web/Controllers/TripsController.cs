@@ -31,14 +31,14 @@
                 return this.NotFound();
             }
 
-            const int ItemsPerPage = 5;
+            const int ItemsPerPage = 6;
 
             var viewModel = new TripsListViewModel
             {
                 ItemsPerPage = ItemsPerPage,
                 PageNumber = id,
                 TripsCount = await this.tripsService.GetCountAsync(),
-                Trips = await this.tripsService.GetAllAsync<TripViewModel>(),
+                Trips = await this.tripsService.GetAllAsync<TripViewModel>(id, ItemsPerPage),
             };
 
             return this.View(viewModel);

@@ -17,16 +17,34 @@
                 {
                     StartDate = DateTime.Parse("2022/05/15"),
                     EndDate = DateTime.Parse("2022/06/03"),
-                    Price = 4300,
+                    Price = 2300,
                     Discount = 5,
                     DestinationId = 1,
                     ShipId = 1,
                 },
                 new Trip
                 {
+                    StartDate = DateTime.Parse("2022/06/23"),
+                    EndDate = DateTime.Parse("2022/07/03"),
+                    Price = 1050,
+                    Discount = 5,
+                    DestinationId = 2,
+                    ShipId = 2,
+                },
+                new Trip
+                {
+                    StartDate = DateTime.Parse("2022/04/16"),
+                    EndDate = DateTime.Parse("2022/04/25"),
+                    Price = 1510,
+                    Discount = 25,
+                    DestinationId = 3,
+                    ShipId = 3,
+                },
+                new Trip
+                {
                     StartDate = DateTime.Parse("2022/09/24"),
                     EndDate = DateTime.Parse("2022/09/30"),
-                    Price = 2350,
+                    Price = 1350,
                     Discount = 10,
                     DestinationId = 4,
                     ShipId = 2,
@@ -35,7 +53,7 @@
                 {
                     StartDate = DateTime.Parse("2022/10/13"),
                     EndDate = DateTime.Parse("2022/11/01"),
-                    Price = 3600,
+                    Price = 1600,
                     DestinationId = 5,
                     ShipId = 3,
                 },
@@ -43,10 +61,19 @@
                 {
                     StartDate = DateTime.Parse("2022/11/03"),
                     EndDate = DateTime.Parse("2022/12/03"),
-                    Price = 5210,
+                    Price = 2210,
                     Discount = 15,
                     DestinationId = 6,
                     ShipId = 4,
+                },
+                new Trip
+                {
+                    StartDate = DateTime.Parse("2022/03/03"),
+                    EndDate = DateTime.Parse("2022/03/09"),
+                    Price = 1210,
+                    Discount = 25,
+                    DestinationId = 7,
+                    ShipId = 5,
                 },
             };
 

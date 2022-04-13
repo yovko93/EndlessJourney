@@ -27,8 +27,8 @@
         {
             var trip = new Trip
             {
-                StartDate = DateTime.Parse(tripModel.StartDate),
-                EndDate = DateTime.Parse(tripModel.EndDate),
+                StartDate = tripModel.StartDate,
+                EndDate = tripModel.EndDate,
                 Price = tripModel.Price,
                 Discount = tripModel.Discount,
                 DestinationId = tripModel.DestinationId,
@@ -75,9 +75,11 @@
             await this.tripsRepository.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<TModel>> GetAllAsync<TModel>()
+        public async Task<IEnumerable<TModel>> GetAllAsync<TModel>(int page, int itemsPerPage = 6)
             => await this.tripsRepository
                 .AllAsNoTracking()
+                .OrderByDescending(x => x.Id)
+                .Skip((page - 1) * itemsPerPage).Take(itemsPerPage)
                 .To<TModel>()
                 .ToListAsync();
 
@@ -109,8 +111,8 @@
                 .All()
                 .FirstOrDefault(x => x.Id == id);
 
-            trip.StartDate = DateTime.Parse(tripModel.StartDate);
-            trip.EndDate = DateTime.Parse(tripModel.EndDate);
+            trip.StartDate = tripModel.StartDate;
+            trip.EndDate = tripModel.EndDate;
             trip.Price = tripModel.Price;
             trip.Discount = tripModel.Discount;
             trip.DestinationId = tripModel.DestinationId;
