@@ -2,21 +2,21 @@
 @using static EndlessJourney.Common.GlobalConstants.RolesNamesConstants
 @{
     this.ViewData["Title"] = Model.DestinationName;
-    int nights = (int)(Model.StartDate.Subtract(Model.EndDate)).TotalDays;
+    int nights = (int)(Model.EndDate.Subtract(Model.StartDate)).TotalDays;
 }
 
 <h2 style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">@this.ViewData["Title"], @nights nights</h2>
 <h5 class="font-weight-lighter">@Model.StartDate.ToString("D") - @Model.EndDate.ToString("D")</h5>
 <h5>Departs:</h5>
 <h5>Arrives:</h5>
-
+<hr />
 <div class="single-trip-layout" style="margin-top:5%">
     <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
         <div class="carousel-inner">
             @foreach (var image in this.Model.Images)
             {
                 <div class="carousel-item active">
-                    <img src="~/images/@image.Id" class="d-block w-100" alt="...">
+                    <img src=@image.PathName class="d-block w-100" style="height:350px;width:100px;" alt="...">
                 </div>
             }
         </div>

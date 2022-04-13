@@ -3,11 +3,12 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using EndlessJourney.Data.Models;
     using EndlessJourney.Web.ViewModels.Trips;
 
     public interface ITripsService
     {
-        Task CreateAsync(CreateTripInputModel tripModel, string imagePath);
+        Task CreateAsync(CreateTripInputModel tripModel, IEnumerable<Image> images);
 
         Task UpdateAsync(string id, EditTripInputModel tripModel);
 

@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -14,7 +13,6 @@
 
     public class TripsService : ITripsService
     {
-        private readonly string[] allowedExtensions = new[] { "jpg", "png", "gif" };
         private readonly IDeletableEntityRepository<Trip> tripsRepository;
 
         public TripsService(
@@ -23,7 +21,7 @@
             this.tripsRepository = tripsRepository;
         }
 
-        public async Task CreateAsync(CreateTripInputModel tripModel, string imagePath)
+        public async Task CreateAsync(CreateTripInputModel tripModel, IEnumerable<Image> images)
         {
             var trip = new Trip
             {
@@ -35,25 +33,9 @@
                 ShipId = tripModel.ShipId,
             };
 
-            Directory.CreateDirectory($"{imagePath}/trips/");
-            foreach (var image in tripModel.Images)
+            foreach (var image in images)
             {
-                var extension = Path.GetExtension(image.FileName).TrimStart('.');
-                if (!this.allowedExtensions.Any(x => extension.EndsWith(x)))
-                {
-                    throw new Exception($"Invalid image extension {extension}");
-                }
-
-                var dbImage = new Image
-                {
-                    Extension = extension,
-                };
-
-                trip.Images.Add(dbImage);
-
-                var physicalPath = $"{imagePath}/trips/{dbImage.Id}.{extension}";
-                using Stream fileStream = new FileStream(physicalPath, FileMode.Create);
-                await image.CopyToAsync(fileStream);
+                trip.Images.Add(image);
             }
 
             await this.tripsRepository.AddAsync(trip);

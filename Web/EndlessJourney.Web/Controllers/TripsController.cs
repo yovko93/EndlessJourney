@@ -1,9 +1,11 @@
 ﻿namespace EndlessJourney.Web.Controllers
 {
     using System;
-    using System.Linq;
+    using System.IO;
     using System.Threading.Tasks;
+
     using EndlessJourney.Services.Data.Destinations;
+    using EndlessJourney.Services.Data.Images;
     using EndlessJourney.Services.Data.Ships;
     using EndlessJourney.Services.Data.Trips;
     using EndlessJourney.Web.ViewModels.Trips;
@@ -15,21 +17,24 @@
 
     public class TripsController : Controller
     {
-        private readonly IWebHostEnvironment environment;
+        private readonly IWebHostEnvironment webHostEnvironment;
         private readonly ITripsService tripsService;
         private readonly IShipsService shipsService;
         private readonly IDestinationsService destinationsService;
+        private readonly IImagesService imagesService;
 
         public TripsController(
-            IWebHostEnvironment environment,
+            IWebHostEnvironment webHostEnvironment,
             ITripsService tripsService,
             IShipsService shipsService,
-            IDestinationsService destinationsService)
+            IDestinationsService destinationsService,
+            IImagesService imagesService)
         {
-            this.environment = environment;
+            this.webHostEnvironment = webHostEnvironment;
             this.tripsService = tripsService;
             this.shipsService = shipsService;
             this.destinationsService = destinationsService;
+            this.imagesService = imagesService;
         }
 
         public async Task<IActionResult> All(int id = 1)
@@ -83,9 +88,18 @@
             // TODO remove
             // var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             // var user = await this.userManager.GetUserAsync(this.User);
+
+            var wwwRootDirectory = this.webHostEnvironment.WebRootPath;
+            if (Directory.Exists(Path.Combine(wwwRootDirectory, "images/trips")) == false)
+            {
+                Directory.CreateDirectory(Path.Combine(wwwRootDirectory, "images/trips"));
+            }
+
+            var images = await this.imagesService.UploadImages(inputModel.Images, wwwRootDirectory);
+
             try
             {
-                await this.tripsService.CreateAsync(inputModel, $"{this.environment.WebRootPath}/images");
+                await this.tripsService.CreateAsync(inputModel, images);
             }
             catch (Exception ex)
             {

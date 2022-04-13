@@ -21,10 +21,10 @@
 @foreach (var trip in this.Model.Trips)
 {
     <div class="row">
-        <div class="card mb-3" style="max-width: 1000px;">
+        <div class="card mb-3" style="max-width: 100%">
             <div class="row g-0">
                 <div class="col-md-4">
-                    <img src="https://media.istockphoto.com/photos/aerial-view-of-a-downtown-at-sunset-picture-id601158224?k=20&m=601158224&s=612x612&w=0&h=N9CrqmELt5JypNmXwnG3ZQm1qIRn1LH4pb7H6m-BHeE=" class="img-fluid rounded-start " alt="...">
+                    <img src=@trip.PathName class="img-fluid rounded-start " alt="No image available">
                 </div>
                 <div class="col-md-8">
                     <div class="col-md-6 card-body d-md-inline-block">

@@ -13,7 +13,7 @@
 
         public DateTime CreatedOn { get; set; }
 
-        public string ImageUrl { get; set; }
+        public string PathName { get; set; }
 
         public string StartDate { get; set; }
 
@@ -34,11 +34,9 @@
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Trip, TripViewModel>()
-                 .ForMember(x => x.ImageUrl, opt =>
+                 .ForMember(x => x.PathName, opt =>
                      opt.MapFrom(x =>
-                         x.Images.FirstOrDefault().ImageUrl != null ?
-                         x.Images.FirstOrDefault().ImageUrl :
-                         "/images/trips/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension));
+                         x.Images.FirstOrDefault().PathName));
         }
     }
 }

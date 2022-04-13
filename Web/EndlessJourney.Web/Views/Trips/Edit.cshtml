@@ -6,6 +6,7 @@
 
 <form method="post" id="editForm" class="col-md-6 offset-md-3">
     <h1>@ViewData["Title"]</h1>
+    <hr />
     <div class="form-group">
         <label asp-for="StartDate">Start Date</label>
         <input asp-for="StartDate" class="form-control" />
@@ -36,8 +37,8 @@
         <select asp-for="DestinationId" class="form-control" asp-items="destinations"></select>
         <span asp-validation-for="DestinationId" class="text-danger"></span>
     </div>
-    <hr />
     <input type="hidden" asp-for="Id" />
+    <hr />
     <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#modalEdit">Save changes</button>
 </form>
 

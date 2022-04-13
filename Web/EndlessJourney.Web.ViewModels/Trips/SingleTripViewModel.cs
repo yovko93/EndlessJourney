@@ -2,9 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
 
-    using AutoMapper;
     using EndlessJourney.Data.Models;
     using EndlessJourney.Services.Mapping;
 
@@ -38,25 +36,6 @@
 
         public string ShipImagePathName { get; set; }
 
-        public string ImageUrl { get; set; }
-
         public ICollection<Image> Images { get; set; }
-
-        public void CreateMappings(IProfileExpression configuration)
-        {
-            configuration.CreateMap<Trip, SingleTripViewModel>()
-                .ForMember(x => x.ImageUrl, opt =>
-                    opt.MapFrom(x =>
-                        x.Images.FirstOrDefault().ImageUrl != null ?
-                        x.Images.FirstOrDefault().ImageUrl :
-                        "/images/trips/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension))
-                    .ForMember(x => x.ShipImagePathName, opt =>
-                    opt.MapFrom(x =>
-                        x.Ship.Image.ImageUrl != null ?
-                        x.Ship.Image.ImageUrl :
-                        "/images/" + x.Ship.Image.PathName + "." + x.Ship.Image.Extension));
-        }
-
-        // TODO show all images
     }
 }
