@@ -6,27 +6,41 @@
 @*TODO remove*@
 @if (this.TempData.ContainsKey("Message"))
 {
-    <div class="alert alert-success">@this.TempData["Message"]</div>}
+    <div class="alert alert-success">@this.TempData["Message"]</div>
+}
 
 <h1>@this.ViewData["Title"]</h1>
 <hr />
+<div>
+    <ul>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Trips" asp-action="Create">Create Trip</a>
+        </li>
+    </ul>
+</div>
 @foreach (var trip in this.Model.Trips)
 {
     <div class="row">
         <div class="card mb-3" style="max-width: 1000px;">
             <div class="row g-0">
                 <div class="col-md-4">
-                    <img src="@trip.ImageUrl" class="img-fluid rounded-start " alt="...">
+                    <img src="https://media.istockphoto.com/photos/aerial-view-of-a-downtown-at-sunset-picture-id601158224?k=20&m=601158224&s=612x612&w=0&h=N9CrqmELt5JypNmXwnG3ZQm1qIRn1LH4pb7H6m-BHeE=" class="img-fluid rounded-start " alt="...">
                 </div>
                 <div class="col-md-8">
                     <div class="col-md-6 card-body d-md-inline-block">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        <h5 class="card-title">@trip.DestinationName</h5>
+                        <span>@trip.ShipName</span>
+                        <p class="card-text" style="margin-top:10%;margin-bottom:0%">Departs: @trip.DestinationStartPointName @trip.StartDate.Substring(0, 10)</p>
+                        <p class="card-text" style="margin-top:0%">Arrives: @trip.DestinationEndPointName @trip.EndDate.Substring(0, 10)</p>
+                        <p class="card-text"><small class="text-muted">Last updated @DateTime.Now.Subtract(@trip.CreatedOn).Days days ago</small></p>
                     </div>
                     <div class="col-md-4 card-body d-md-inline-block">
-                        <p class="float-md-right">@trip.Price$ per person</p>
-                        <button class="float-md-right alert btn-info">Book now</button>
+                        <p class="float-md-right" style="margin-bottom:15%">@trip.Price$ per person</p>
+                        <ul class="btn-group-toggle" style="list-style:none">
+                            <li class="single-meta">
+                                <a asp-controller="Trips" asp-action="ById" asp-route-id="@trip.Id" class="float-md-right alert btn btn-info">View Details</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -34,4 +48,5 @@
     </div>
 }
 <hr />
+
 <partial name="_PagingPartial" model="@Model" />

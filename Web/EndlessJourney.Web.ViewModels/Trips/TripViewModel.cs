@@ -1,5 +1,6 @@
 ﻿namespace EndlessJourney.Web.ViewModels.Trips
 {
+    using System;
     using System.Linq;
 
     using AutoMapper;
@@ -9,6 +10,8 @@
     public class TripViewModel : IMapFrom<Trip>, IHaveCustomMappings
     {
         public string Id { get; set; }
+
+        public DateTime CreatedOn { get; set; }
 
         public string ImageUrl { get; set; }
 
@@ -31,11 +34,11 @@
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Trip, TripViewModel>()
-                .ForMember(x => x.ImageUrl, opt =>
-                    opt.MapFrom(x =>
-                        x.Images.FirstOrDefault().ImageUrl != null ?
-                        x.Images.FirstOrDefault().ImageUrl :
-                        "/images/trips/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension));
+                 .ForMember(x => x.ImageUrl, opt =>
+                     opt.MapFrom(x =>
+                         x.Images.FirstOrDefault().ImageUrl != null ?
+                         x.Images.FirstOrDefault().ImageUrl :
+                         "/images/trips/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension));
         }
     }
 }

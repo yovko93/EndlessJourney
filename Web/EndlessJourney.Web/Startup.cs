@@ -9,6 +9,8 @@
     using EndlessJourney.Data.Repositories;
     using EndlessJourney.Data.Seeding;
     using EndlessJourney.Services.Data;
+    using EndlessJourney.Services.Data.Destinations;
+    using EndlessJourney.Services.Data.Ships;
     using EndlessJourney.Services.Data.Trips;
     using EndlessJourney.Services.Mapping;
     using EndlessJourney.Services.Messaging;
@@ -72,6 +74,8 @@
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ITripsService, TripsService>();
+            services.AddTransient<IShipsService, ShipsService>();
+            services.AddTransient<IDestinationsService, DestinationsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

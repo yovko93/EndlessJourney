@@ -1,8 +1,10 @@
 ﻿namespace EndlessJourney.Web.Controllers
 {
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
-
+    using EndlessJourney.Services.Data.Destinations;
+    using EndlessJourney.Services.Data.Ships;
     using EndlessJourney.Services.Data.Trips;
     using EndlessJourney.Web.ViewModels.Trips;
     using Microsoft.AspNetCore.Authorization;
@@ -13,15 +15,21 @@
 
     public class TripsController : Controller
     {
-        private readonly ITripsService tripsService;
         private readonly IWebHostEnvironment environment;
+        private readonly ITripsService tripsService;
+        private readonly IShipsService shipsService;
+        private readonly IDestinationsService destinationsService;
 
         public TripsController(
+            IWebHostEnvironment environment,
             ITripsService tripsService,
-            IWebHostEnvironment environment)
+            IShipsService shipsService,
+            IDestinationsService destinationsService)
         {
-            this.tripsService = tripsService;
             this.environment = environment;
+            this.tripsService = tripsService;
+            this.shipsService = shipsService;
+            this.destinationsService = destinationsService;
         }
 
         public async Task<IActionResult> All(int id = 1)
@@ -56,16 +64,20 @@
         public IActionResult Create()
         {
             var viewModel = new CreateTripInputModel();
+            viewModel.Destinations = this.destinationsService.GetAllAsKeyValuePairs();
+            viewModel.Ships = this.shipsService.GetAllAsKeyValuePairs();
             return this.View(viewModel);
         }
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Create(CreateTripInputModel input)
+        public async Task<IActionResult> Create(CreateTripInputModel inputModel)
         {
             if (!this.ModelState.IsValid)
             {
-                return this.View(input);
+                inputModel.Destinations = this.destinationsService.GetAllAsKeyValuePairs();
+                inputModel.Ships = this.shipsService.GetAllAsKeyValuePairs();
+                return this.View(inputModel);
             }
 
             // TODO remove
@@ -73,12 +85,14 @@
             // var user = await this.userManager.GetUserAsync(this.User);
             try
             {
-                await this.tripsService.CreateAsync(input, $"{this.environment.WebRootPath}/images");
+                await this.tripsService.CreateAsync(inputModel, $"{this.environment.WebRootPath}/images");
             }
             catch (Exception ex)
             {
                 this.ModelState.AddModelError(string.Empty, ex.Message);
-                return this.View(input);
+                inputModel.Destinations = this.destinationsService.GetAllAsKeyValuePairs();
+                inputModel.Ships = this.shipsService.GetAllAsKeyValuePairs();
+                return this.View(inputModel);
             }
 
             this.TempData["Message"] = "Trip added successfully.";
@@ -90,22 +104,26 @@
         [Authorize(Roles = AdministratorRoleName)]
         public IActionResult Edit(string id)
         {
-            var inputModel = this.tripsService
-                .GetByIdAsync<EditTripInputModel>(id);
+            var inputModel = this.tripsService.GetByIdAsync<EditTripInputModel>(id).Result;
+
+            inputModel.Destinations = this.destinationsService.GetAllAsKeyValuePairs();
+            inputModel.Ships = this.shipsService.GetAllAsKeyValuePairs();
 
             return this.View(inputModel);
         }
 
         [HttpPost]
         [Authorize(Roles = AdministratorRoleName)]
-        public async Task<IActionResult> Edit(string id, EditTripInputModel input)
+        public async Task<IActionResult> Edit(string id, EditTripInputModel inputModel)
         {
             if (!this.ModelState.IsValid)
             {
-                return this.View(input);
+                inputModel.Destinations = this.destinationsService.GetAllAsKeyValuePairs();
+                inputModel.Ships = this.shipsService.GetAllAsKeyValuePairs();
+                return this.View(inputModel);
             }
 
-            await this.tripsService.UpdateAsync(id, input);
+            await this.tripsService.UpdateAsync(id, inputModel);
             return this.RedirectToAction(nameof(this.ById), new { id });
         }
 
