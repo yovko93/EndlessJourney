@@ -43,6 +43,42 @@
                     PathName = "/wwwroot/images/QueenMary2",
                     Extension = "jpg",
                 },
+                new Image
+                {
+                    TripId = null,
+                    PathName = "/images/trips/istockphoto-148543868-612x612.jpg",
+                    Extension = "jpg",
+                },
+                new Image
+                {
+                    TripId = null,
+                    PathName = "/images/trips/istockphoto-509846884-612x612.jpg",
+                    Extension = "jpg",
+                },
+                new Image
+                {
+                    TripId = null,
+                    PathName = "/images/trips/istockphoto-636665220-612x612.jpg",
+                    Extension = "jpg",
+                },
+                new Image
+                {
+                    TripId = null,
+                    PathName = "/images/trips/istockphoto-1192581562-612x612.jpg",
+                    Extension = "jpg",
+                },
+                new Image
+                {
+                    TripId = null,
+                    PathName = "/images/trips/istockphoto-1187480763-612x612.jpg",
+                    Extension = "jpg",
+                },
+                new Image
+                {
+                    TripId = null,
+                    PathName = "/images/trips/istockphoto-1170809635-612x612.jpg",
+                    Extension = "jpg",
+                },
             };
 
             foreach (Image image in imagesList)
