@@ -2,7 +2,15 @@
 @using static EndlessJourney.Common.GlobalConstants.RolesNamesConstants
 @{
     this.ViewData["Title"] = Model.DestinationName;
+}
+
+@{
     int nights = (int)(Model.EndDate.Subtract(Model.StartDate)).TotalDays;
+    var images = Model.Images.ToArray();
+    var firstImage = images.Any() ? images[0] : null;
+    var secondImage = images.Length > 1 ? images[1] : null;
+    var thirdImage = images.Length > 2 ? images[2] : null;
+
 }
 
 <h2 style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">@this.ViewData["Title"], @nights nights</h2>
@@ -10,104 +18,109 @@
 <h5>Departs:</h5>
 <h5>Arrives:</h5>
 <hr />
-<div class="single-trip-layout" style="margin-top:5%">
-    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            @foreach (var image in this.Model.Images)
+
+<div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        @if (firstImage != null)
+        {
+            <div class="carousel-item active" data-bs-interval="1000">
+                <img src=@firstImage.PathName class="d-block w-100" style="height:450px;width:100px;" alt="...">
+            </div>
+        }
+        @if (secondImage != null)
+        {
+            <div class="carousel-item" data-bs-interval="1000">
+                <img src=@secondImage.PathName class="d-block w-100" style="height:450px;width:100px;" alt="...">
+            </div>
+        }
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<!--Trip details-->
+<div class="row" style="margin-top:5%">
+    <div class="col-md-6 card-body d-md-inline-block">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    </div>
+    <div class="col-md-4 card-body d-md-inline-block">
+        <ul class="btn-group-toggle" style="list-style:none">
+            @if (this.User.IsInRole(AdministratorRoleName))
             {
-                <div class="carousel-item active">
-                    <img src=@image.PathName class="d-block w-100" style="height:350px;width:100px;" alt="...">
-                </div>
+                <li class="single-meta">
+                    <a asp-controller="Trips" asp-action="Edit" asp-route-id="@Model.Id" class="float-md-right btn btn-info">Edit</a>
+                </li>
+                <li class="single-meta">
+                    <form method="post" asp-action="Delete" id="deleteForm" asp-route-id="@Model.Id">
+                    </form>
+                    <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
+                </li>
             }
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
-
-    <!--Trip details-->
-    <div class="row" style="margin-top:5%">
-        <div class="col-md-6 card-body d-md-inline-block">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-        </div>
-        <div class="col-md-4 card-body d-md-inline-block">
-            <ul class="btn-group-toggle" style="list-style:none">
-                @if (this.User.IsInRole(AdministratorRoleName))
+            else
+            {
+                @if (this.User.Identity.IsAuthenticated)
                 {
                     <li class="single-meta">
-                        <a asp-controller="Trips" asp-action="Edit" asp-route-id="@Model.Id" class="float-md-right btn btn-info">Edit</a>
-                    </li>
-                    <li class="single-meta">
-                        <form method="post" asp-action="Delete" id="deleteForm" asp-route-id="@Model.Id">
-                        </form>
-                        <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
+                        <a asp-controller="Books" asp-action="Book" asp-route-id="@Model.Id" class="float-md-right alert btn btn-info">Book now</a>
                     </li>
                 }
-                else
-                {
-                    @if (this.User.Identity.IsAuthenticated)
-                    {
-                        <li class="single-meta">
-                            <a asp-controller="Books" asp-action="Book" asp-route-id="@Model.Id" class="float-md-right alert btn btn-info">Book now</a>
-                        </li>
-                    }
-                }
-            </ul>
-        </div>
+            }
+        </ul>
     </div>
+</div>
 
-    <!--Room info-->
-    <div class="trip-info">
-        <div class="room-info text-center">
-            <h3 class="font-weight-light" style="margin-top:5%">Accommodation.</h3>
-            <p style="margin:30px; margin-left:20%; margin-right:20%">From parties of one to families of four, you’ll find a variety of spacious staterooms and suites on board our ships to make your voyage as comfortable as possible.</p>
-        </div>
-        <div>
-
-        </div>
+<!--Room info-->
+<div class="trip-info">
+    <div class="room-info text-center">
+        <h3 class="font-weight-light" style="margin-top:5%">Accommodation.</h3>
+        <p style="margin:30px; margin-left:20%; margin-right:20%">From parties of one to families of four, you’ll find a variety of spacious staterooms and suites on board our ships to make your voyage as comfortable as possible.</p>
     </div>
+    <div>
 
-    <!--Ship details-->
-    <div class="container-sm text-center" style="display:block">
-        <div class="title-holder">
-            <h2 style="margin-top:5%">Your Ship: @Model.ShipName.</h2>
-            <p style="margin:30px; margin-left:20%; margin-right:20%">@Model.ShipDescription</p>
-        </div>
-        <div class="ship-info-container">
-            <div class="d-inline-block col-1">
-                <div>
-                    <span>@Model.ShipCapacity</span>
-                </div>
-                <div>
-                    <span>Guests</span>
-                </div>
+    </div>
+</div>
+
+<!--Ship details-->
+<div class="container-sm text-center" style="display:block">
+    <div class="title-holder">
+        <h2 style="margin-top:5%">Your Ship: @Model.ShipName.</h2>
+        <p style="margin:30px; margin-left:20%; margin-right:20%">@Model.ShipDescription</p>
+    </div>
+    <div class="ship-info-container">
+        <div class="d-inline-block col-1">
+            <div>
+                <span>@Model.ShipCapacity</span>
             </div>
-            <div class="d-inline-block col-1">
-                <div>
-                    <span>@Model.ShipCrew</span>
-                </div>
-                <div>
-                    <span>Crew</span>
-                </div>
-            </div>
-            <div class="d-inline-block col-1">
-                <div>
-                    <span>@Model.ShipLength ft</span>
-                </div>
-                <div>
-                    <span>Length</span>
-                </div>
+            <div>
+                <span>Guests</span>
             </div>
         </div>
-        <img src="@Model.ShipImagePathName" class="img-fluid" alt="...">
+        <div class="d-inline-block col-1">
+            <div>
+                <span>@Model.ShipCrew</span>
+            </div>
+            <div>
+                <span>Crew</span>
+            </div>
+        </div>
+        <div class="d-inline-block col-1">
+            <div>
+                <span>@Model.ShipLength ft</span>
+            </div>
+            <div>
+                <span>Length</span>
+            </div>
+        </div>
     </div>
+    <img src=@Model.ShipImage class="img-fluid" alt="...">
 </div>
 
 <!--Delete Modal-->

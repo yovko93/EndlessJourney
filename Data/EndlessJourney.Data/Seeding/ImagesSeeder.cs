@@ -16,31 +16,31 @@
                 new Image
                 {
                     ShipId = 1,
-                    PathName = "/wwwroot/images/CaribbeanPrincess",
+                    PathName = "/images/CaribbeanPrincess.jpg",
                     Extension = "jpg",
                 },
                 new Image
                 {
                     ShipId = 2,
-                    PathName = "/wwwroot/images/SunPrincess",
+                    PathName = "/images/SunPrincess.jpg",
                     Extension = "jpg",
                 },
                 new Image
                 {
                     ShipId = 3,
-                    PathName = "/wwwroot/images/Fantasy",
+                    PathName = "/images/Fantasy.jpg",
                     Extension = "jpg",
                 },
                 new Image
                 {
                     ShipId = 4,
-                    PathName = "/wwwroot/images/Columbus2",
+                    PathName = "/images/Columbus2.jpg",
                     Extension = "jpg",
                 },
                 new Image
                 {
                     ShipId = 5,
-                    PathName = "/wwwroot/images/QueenMary2",
+                    PathName = "/images/QueenMary2.jpg",
                     Extension = "jpg",
                 },
                 new Image

@@ -3,10 +3,11 @@
     using System;
     using System.Collections.Generic;
 
+    using AutoMapper;
     using EndlessJourney.Data.Models;
     using EndlessJourney.Services.Mapping;
 
-    public class SingleTripViewModel : IMapFrom<Trip>
+    public class SingleTripViewModel : IMapFrom<Trip>, IHaveCustomMappings
     {
         public string Id { get; set; }
 
@@ -34,8 +35,17 @@
 
         public int ShipLength { get; set; }
 
-        public string ShipImagePathName { get; set; }
+        public string ShipImage { get; set; }
 
         public ICollection<Image> Images { get; set; }
+
+        // TODO show ship image
+        public void CreateMappings(IProfileExpression configuration)
+        {
+            configuration.CreateMap<Trip, SingleTripViewModel>()
+                  .ForMember(x => x.ShipImage, opt =>
+                      opt.MapFrom(x =>
+                          x.Ship.Image.PathName));
+        }
     }
 }
