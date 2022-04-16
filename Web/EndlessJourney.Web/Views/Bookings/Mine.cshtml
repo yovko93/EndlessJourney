@@ -1,0 +1,28 @@
+﻿@model EndlessJourney.Web.ViewModels.Trips.TripsListViewModel
+@{
+    this.ViewData["Title"] = "My Trips - " + Model.Count;
+}
+
+@if (this.TempData.ContainsKey("Message"))
+{
+    <div class="alert alert-success">@this.TempData["Message"]</div>
+}
+
+<h1>@this.ViewData["Title"]</h1>
+<hr />
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    @foreach (var trip in this.Model.Trips)
+    {
+        <div class="col">
+            <div class="card">
+                <img src=@trip.PathName class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">@trip.DestinationName</h5>
+                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<hr />
+<partial name="_PagingPartial" model="@Model" />

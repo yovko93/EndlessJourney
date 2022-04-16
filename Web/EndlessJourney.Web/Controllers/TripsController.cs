@@ -85,10 +85,6 @@
                 return this.View(inputModel);
             }
 
-            // TODO remove
-            // var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            // var user = await this.userManager.GetUserAsync(this.User);
-
             var wwwRootDirectory = this.webHostEnvironment.WebRootPath;
             if (Directory.Exists(Path.Combine(wwwRootDirectory, "images/trips")) == false)
             {
@@ -111,7 +107,6 @@
 
             this.TempData["Message"] = "Trip added successfully.";
 
-            // TODO: Redirect to recipe info page
             return this.RedirectToAction(nameof(this.All));
         }
 
