@@ -68,7 +68,7 @@
                 @if (this.User.Identity.IsAuthenticated)
                 {
                     <li class="single-meta">
-                        <a asp-controller="Books" asp-action="Book" asp-route-id="@Model.Id" class="float-md-right alert btn btn-info">Book now</a>
+                        <a asp-controller="Bookings" asp-action="Book" asp-route-id="@Model.Id" class="float-md-right alert btn btn-info">Book now</a>
                     </li>
                 }
             }
