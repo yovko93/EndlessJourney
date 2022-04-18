@@ -14,6 +14,8 @@
 
         public int Children { get; set; }
 
+        public int Infant { get; set; }
+
         public string TripId { get; set; }
 
         public Trip Trip { get; set; }
