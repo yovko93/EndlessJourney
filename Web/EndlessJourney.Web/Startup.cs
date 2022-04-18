@@ -9,6 +9,7 @@
     using EndlessJourney.Data.Repositories;
     using EndlessJourney.Data.Seeding;
     using EndlessJourney.Services.Data.Bookings;
+    using EndlessJourney.Services.Data.Cities;
     using EndlessJourney.Services.Data.Destinations;
     using EndlessJourney.Services.Data.Images;
     using EndlessJourney.Services.Data.Ships;
@@ -73,6 +74,7 @@
             services.AddTransient<IDestinationsService, DestinationsService>();
             services.AddTransient<IImagesService, ImagesService>();
             services.AddTransient<IBookingsService, BookingsService>();
+            services.AddTransient<ICitiesService, CitiesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
