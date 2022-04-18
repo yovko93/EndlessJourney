@@ -78,6 +78,26 @@
                     Name = "United Arab Emirates",
                     Capital = "Abu Dhabi",
                 },
+                new Country
+                {
+                    Name = "Italy",
+                    Capital = "Rome",
+                },
+                new Country
+                {
+                    Name = "Brazil",
+                    Capital = "Brazil",
+                },
+                new Country
+                {
+                    Name = "Chile",
+                    Capital = "Santiago",
+                },
+                new Country
+                {
+                    Name = "Argentina",
+                    Capital = "Buenos Aires",
+                },
             };
 
             foreach (Country country in countriesList)
