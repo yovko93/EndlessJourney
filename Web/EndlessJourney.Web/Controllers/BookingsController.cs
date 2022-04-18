@@ -72,7 +72,9 @@
             {
                 this.ModelState.AddModelError(string.Empty, ex.Message);
 
-                return this.View(inputModel);
+                this.TempData["Message"] = ex.Message;
+
+                return this.RedirectToAction(nameof(TripsController.All), "Trips");
             }
 
             this.TempData["Message"] = "Trip booked successfully!";

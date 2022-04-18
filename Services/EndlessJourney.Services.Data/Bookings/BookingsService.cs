@@ -1,5 +1,6 @@
 ﻿namespace EndlessJourney.Services.Data.Bookings
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -32,6 +33,7 @@
             {
                 Adult = bookingModel.Adult,
                 Children = bookingModel.Children,
+                Infant = bookingModel.Infant,
                 CustomerId = bookingModel.UserId,
                 TripId = bookingModel.TripId,
             };
@@ -44,6 +46,15 @@
                 UserId = booking.CustomerId,
                 TripId = booking.TripId,
             };
+
+            var isBooked = await this.userTripsRepository
+                .AllAsNoTracking()
+                .AnyAsync(x => x.TripId == userTrip.TripId && x.UserId == userTrip.UserId);
+
+            if (isBooked)
+            {
+                throw new Exception("Trip is booked already!");
+            }
 
             await this.userTripsRepository.AddAsync(userTrip);
             await this.userTripsRepository.SaveChangesAsync();

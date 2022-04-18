@@ -3,30 +3,50 @@
     ViewData["Title"] = "Book a trip";
 }
 
-<form method="post" id="bookForm" class="col-md-6 offset-md-3">
-    <h1>@ViewData["Title"]</h1>
-    <hr />
-    <div class="form-group">
-        <label asp-for="Adult">Adults</label>
-        <input asp-for="Adult" class="form-control" />
-        <span asp-validation-for="Adult" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Children">Childrens</label>
-        <input asp-for="Children" class="form-control" />
-        <span asp-validation-for="Children" class="text-danger"></span>
-    </div>
-    @*<input type="hidden" asp-for="TripId" />*@
-    <hr />
-    <div>
-        Total cost: $
-    </div>
-    <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#modalBook">Book now</button>
-</form>
+@if (this.TempData.ContainsKey("Message"))
+{
+    <div class="alert alert-success">@this.TempData["Message"]</div>
+}
 
-@*TODO fix *@
-<!-- Modal -->
-<div class="modal" id="modalBook" tabindex="-1" role="dialog">
+<h1>@ViewData["Title"]</h1>
+<hr />
+
+<div>
+    <div class="text-center">
+        <h3 class="font-weight-light" style="margin-top:5%">Accommodation.</h3>
+        <p style="margin:30px; margin-left:20%; margin-right:20%">
+            Please select the number of guests per stateroom. Please note, the maximum occupancy of our staterooms and suites is four guests and staterooms for 3-4 people are limited due to overall ship capacity.
+        </p>
+    </div>
+    <form method="post" id="bookForm" class="col-md-6 offset-md-3" style="margin-top:5%">
+        <div class="form-group">
+            <label asp-for="Adult"></label>
+            <input asp-for="Adult" class="form-control" />
+            <span asp-validation-for="Adult" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Children"></label>
+            <input asp-for="Children" class="form-control" />
+            <span asp-validation-for="Children" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Infant"></label>
+            <input asp-for="Infant" class="form-control" />
+            <span asp-validation-for="Infant" class="text-danger"></span>
+        </div>
+        @*<input type="hidden" asp-for="TripId" />*@
+        <hr />
+        <div>
+            Total cost: $
+        </div>
+    </form>
+    <div class="col-md-6 offset-md-3">
+        <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#bookModal">Book now</button>
+    </div>
+</div>
+
+<!-- Book Modal -->
+<div class="modal" id="bookModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
