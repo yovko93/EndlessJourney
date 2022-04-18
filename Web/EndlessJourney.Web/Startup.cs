@@ -26,7 +26,6 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
-    using Microsoft.OpenApi.Models;
 
     public class Startup
     {
@@ -61,10 +60,7 @@
             services.AddRazorPages();
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v2", new OpenApiInfo { Title = "MVCCallWebAPI", Version = "v2" });
-            });
+           
 
             services.AddSingleton(this.configuration);
 
@@ -95,11 +91,6 @@
                 new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
             }
 
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v2/swagger.json", "MVCCallWebAPI");
-            });
 
             if (env.IsDevelopment())
             {
