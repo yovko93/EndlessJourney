@@ -1,13 +1,11 @@
-﻿using EndlessJourney.Services.Data.Destinations;
-using EndlessJourney.Web.ViewModels.Destinations;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace EndlessJourney.Web.Controllers
+﻿namespace EndlessJourney.Web.Controllers
 {
+    using System.Threading.Tasks;
+
+    using EndlessJourney.Services.Data.Destinations;
+    using EndlessJourney.Web.ViewModels.Destinations;
+    using Microsoft.AspNetCore.Mvc;
+
     public class DestinationsController : Controller
     {
         private readonly IDestinationsService destinationsService;

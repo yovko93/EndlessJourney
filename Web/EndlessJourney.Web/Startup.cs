@@ -8,7 +8,6 @@
     using EndlessJourney.Data.Models;
     using EndlessJourney.Data.Repositories;
     using EndlessJourney.Data.Seeding;
-    using EndlessJourney.Services.Data;
     using EndlessJourney.Services.Data.Bookings;
     using EndlessJourney.Services.Data.Destinations;
     using EndlessJourney.Services.Data.Images;
@@ -60,8 +59,6 @@
             services.AddRazorPages();
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-           
-
             services.AddSingleton(this.configuration);
 
             // Data repositories
@@ -90,7 +87,6 @@
                 dbContext.Database.Migrate();
                 new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
             }
-
 
             if (env.IsDevelopment())
             {
