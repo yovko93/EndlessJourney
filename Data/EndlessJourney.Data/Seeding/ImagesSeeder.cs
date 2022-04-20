@@ -15,36 +15,6 @@
             {
                 new Image
                 {
-                    ShipId = 1,
-                    PathName = "/images/CaribbeanPrincess.jpg",
-                    Extension = "jpg",
-                },
-                new Image
-                {
-                    ShipId = 2,
-                    PathName = "/images/SunPrincess.jpg",
-                    Extension = "jpg",
-                },
-                new Image
-                {
-                    ShipId = 3,
-                    PathName = "/images/Fantasy.jpg",
-                    Extension = "jpg",
-                },
-                new Image
-                {
-                    ShipId = 4,
-                    PathName = "/images/Columbus2.jpg",
-                    Extension = "jpg",
-                },
-                new Image
-                {
-                    ShipId = 5,
-                    PathName = "/images/QueenMary2.jpg",
-                    Extension = "jpg",
-                },
-                new Image
-                {
                     TripId = null,
                     PathName = "/images/trips/istockphoto-148543868-612x612.jpg",
                     Extension = "jpg",

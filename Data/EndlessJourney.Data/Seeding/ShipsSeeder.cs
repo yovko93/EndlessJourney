@@ -20,7 +20,11 @@
                     Capacity = 300,
                     Crew = 158,
                     Length = 1132,
-                    ImageId = 1,
+                    Image = new Image
+                            {
+                                PathName = "/images/CaribbeanPrincess.jpg",
+                                Extension = "jpg",
+                            },
                 },
                 new Ship
                 {
@@ -29,7 +33,11 @@
                     Capacity = 500,
                     Crew = 198,
                     Length = 1236,
-                    ImageId = 2,
+                    Image = new Image
+                            {
+                                PathName = "/images/SunPrincess.jpg",
+                                Extension = "jpg",
+                            },
                 },
                 new Ship
                 {
@@ -38,7 +46,12 @@
                     Capacity = 700,
                     Crew = 242,
                     Length = 1338,
-                    ImageId = 3,
+                    Image = new Image
+                            {
+                                ShipId = 3,
+                                PathName = "/images/Fantasy.jpg",
+                                Extension = "jpg",
+                            },
                 },
                 new Ship
                 {
@@ -47,7 +60,12 @@
                     Capacity = 800,
                     Crew = 274,
                     Length = 1272,
-                    ImageId = 4,
+                    Image = new Image
+                            {
+                                ShipId = 4,
+                                PathName = "/images/Columbus2.jpg",
+                                Extension = "jpg",
+                            },
                 },
                 new Ship
                 {
@@ -56,7 +74,12 @@
                     Capacity = 1000,
                     Crew = 383,
                     Length = 1522,
-                    ImageId = 5,
+                    Image = new Image
+                            {
+                                ShipId = 5,
+                                PathName = "/images/QueenMary2.jpg",
+                                Extension = "jpg",
+                            },
                 },
             };
 
