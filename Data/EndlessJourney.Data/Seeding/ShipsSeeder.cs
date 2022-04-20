@@ -48,7 +48,6 @@
                     Length = 1338,
                     Image = new Image
                             {
-                                ShipId = 3,
                                 PathName = "/images/Fantasy.jpg",
                                 Extension = "jpg",
                             },
@@ -62,7 +61,6 @@
                     Length = 1272,
                     Image = new Image
                             {
-                                ShipId = 4,
                                 PathName = "/images/Columbus2.jpg",
                                 Extension = "jpg",
                             },
@@ -76,7 +74,6 @@
                     Length = 1522,
                     Image = new Image
                             {
-                                ShipId = 5,
                                 PathName = "/images/QueenMary2.jpg",
                                 Extension = "jpg",
                             },
