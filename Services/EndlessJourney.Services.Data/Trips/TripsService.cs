@@ -60,6 +60,7 @@
         public async Task<IEnumerable<TModel>> GetAllAsync<TModel>(int page, int itemsPerPage = 6)
             => await this.tripsRepository
                 .AllAsNoTracking()
+                .Where(x => x.StartDate > DateTime.Now)
                 .OrderByDescending(x => x.Id)
                 .Skip((page - 1) * itemsPerPage).Take(itemsPerPage)
                 .To<TModel>()
@@ -83,6 +84,7 @@
                 .All()
                 .OrderBy(x => Guid.NewGuid())
                 .Take(count)
+                .Where(x => x.StartDate > DateTime.Now)
                 .To<TModel>()
                 .ToListAsync();
         }

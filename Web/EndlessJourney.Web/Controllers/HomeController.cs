@@ -1,16 +1,34 @@
 ﻿namespace EndlessJourney.Web.Controllers
 {
     using System.Diagnostics;
+    using System.Threading.Tasks;
 
+    using EndlessJourney.Services.Data.Trips;
     using EndlessJourney.Web.ViewModels;
-
+    using EndlessJourney.Web.ViewModels.Home;
+    using EndlessJourney.Web.ViewModels.Trips;
     using Microsoft.AspNetCore.Mvc;
 
     public class HomeController : BaseController
     {
-        public IActionResult Index()
+        private readonly ITripsService tripsService;
+
+        public HomeController(
+            ITripsService tripsService)
         {
-            return this.View();
+            this.tripsService = tripsService;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var randomTrips = await this.tripsService.GetRandomAsync<TripViewModel>(3);
+
+            var viewModel = new HomeViewModel
+            {
+                Trips = randomTrips,
+            };
+
+            return this.View(viewModel);
         }
 
         public IActionResult Privacy()
