@@ -83,8 +83,8 @@
             return await this.tripsRepository
                 .All()
                 .OrderBy(x => Guid.NewGuid())
-                .Take(count)
                 .Where(x => x.StartDate > DateTime.Now)
+                .Take(count)
                 .To<TModel>()
                 .ToListAsync();
         }

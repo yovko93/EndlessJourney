@@ -7,6 +7,5 @@
     public class HomeViewModel
     {
         public IEnumerable<TripViewModel> Trips { get; set; }
-
     }
 }
