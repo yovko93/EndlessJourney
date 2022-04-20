@@ -39,7 +39,6 @@
 
         public ICollection<Image> Images { get; set; }
 
-        // TODO show ship image
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Trip, SingleTripViewModel>()

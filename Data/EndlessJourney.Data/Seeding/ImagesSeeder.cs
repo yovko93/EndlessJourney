@@ -49,6 +49,18 @@
                     PathName = "/images/trips/istockphoto-1170809635-612x612.jpg",
                     Extension = "jpg",
                 },
+                new Image
+                {
+                    TripId = null,
+                    PathName = "/images/trips/45344819_1598993460247215_520391431722893312_o.jpg",
+                    Extension = "jpg",
+                },
+                new Image
+                {
+                    TripId = null,
+                    PathName = "/images/trips/45355403_1601031563376738_456487206031196160_o (2).jpg",
+                    Extension = "jpg",
+                },
             };
 
             foreach (Image image in imagesList)
