@@ -58,7 +58,7 @@
                 new Image
                 {
                     TripId = null,
-                    PathName = "/images/trips/45355403_1601031563376738_456487206031196160_o (2).jpg",
+                    PathName = "/images/trips/45355403_1601031563376738_456487206031196160.jpg",
                     Extension = "jpg",
                 },
             };

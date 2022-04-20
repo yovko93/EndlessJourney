@@ -36,8 +36,4 @@
     <ProjectReference Include="..\EndlessJourney.Web.Infrastructure\EndlessJourney.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\EndlessJourney.Web.ViewModels\EndlessJourney.Web.ViewModels.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\images\trips\" />
-  </ItemGroup>
 </Project>
