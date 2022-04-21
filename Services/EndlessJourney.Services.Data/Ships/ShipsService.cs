@@ -2,9 +2,12 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
 
     using EndlessJourney.Data.Common.Repositories;
     using EndlessJourney.Data.Models;
+    using EndlessJourney.Services.Mapping;
+    using Microsoft.EntityFrameworkCore;
 
     public class ShipsService : IShipsService
     {
@@ -29,5 +32,18 @@
                 .ToList()
                 .Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Name));
         }
+
+        public async Task<IEnumerable<TModel>> GetAllAsync<TModel>()
+            => await this.shipsRepository
+                .AllAsNoTracking()
+                .To<TModel>()
+                .ToListAsync();
+
+        public async Task<TModel> GetByIdAsync<TModel>(int id)
+             => await this.shipsRepository
+                .AllAsNoTracking()
+                .Where(x => x.Id == id)
+                .To<TModel>()
+                .FirstOrDefaultAsync();
     }
 }

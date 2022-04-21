@@ -51,7 +51,7 @@
                 ItemsPerPage = ItemsPerPage,
                 PageNumber = id,
                 Count = await this.tripsService.GetCountAsync(),
-                Trips = await this.tripsService.GetAllAsync<TripViewModel>(id, ItemsPerPage),
+                Trips = await this.tripsService.GetAllActiveAsync<TripViewModel>(id, ItemsPerPage),
             };
 
             return this.View(viewModel);

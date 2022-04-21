@@ -14,7 +14,7 @@
 
         Task<TModel> GetByIdAsync<TModel>(string id);
 
-        Task<IEnumerable<TModel>> GetAllAsync<TModel>(int page, int itemsPerPage = 6);
+        Task<IEnumerable<TModel>> GetAllActiveAsync<TModel>(int page, int itemsPerPage = 6);
 
         Task<int> GetCountAsync();
 

@@ -57,7 +57,7 @@
             await this.tripsRepository.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<TModel>> GetAllAsync<TModel>(int page, int itemsPerPage = 6)
+        public async Task<IEnumerable<TModel>> GetAllActiveAsync<TModel>(int page, int itemsPerPage = 6)
             => await this.tripsRepository
                 .AllAsNoTracking()
                 .Where(x => x.StartDate > DateTime.Now)
