@@ -1,8 +1,10 @@
 ﻿@model EndlessJourney.Web.ViewModels.Ships.ShipsListViewModel
+@using EndlessJourney.Common
 @{
     this.ViewData["Title"] = "All ships";
 }
 
+<h4 class="text-muted">@GlobalConstants.SystemName - The Fine Line.</h4>
 <h2>See our @Model.Count amazing ships</h2>
 <hr />
 

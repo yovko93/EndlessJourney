@@ -1,7 +1,6 @@
 ﻿@model EndlessJourney.Web.ViewModels.Trips.TripsListViewModel
 @{
     this.ViewData["Title"] = "All Trips, page " + Model.PageNumber;
-    string lastUpdated = string.Empty;
 }
 
 @if (this.TempData.ContainsKey("Message"))

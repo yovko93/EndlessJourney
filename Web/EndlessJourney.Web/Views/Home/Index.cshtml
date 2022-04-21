@@ -13,69 +13,58 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
-    <div class="card bg-dark text-white">
-        <img src="https://cdn.images.express.co.uk/img/dynamic/135/590x/cruise-ship-dress-code-shorts-smart-casual-cruises-holidays-1123741.jpg?r=1557233107892" class="card-img" style="max-height:500px" alt="...">
-        <div class="card-img-overlay">
-            <h3 class="card-title text-right font-weight-light" style="color:black">Travel the globe this summer.</h3>
+    <div class="card text-center" style="margin-top:2%;margin-right:15%;margin-left:15%">
+        <img src="https://cdn.images.express.co.uk/img/dynamic/135/590x/cruise-ship-dress-code-shorts-smart-casual-cruises-holidays-1123741.jpg?r=1557233107892" class="card-img-bottom rounded img-fluid" style="max-width:auto;" alt="...">
+        <div class="card-img-overlay text-right">
+            <h3 class="card-title font-weight-light" style="color:orange">Travel the globe this summer.</h3>
         </div>
     </div>
-    <h3 class="font-weight-light" style="margin-top:5%">Book and sail with confidence.</h3>
+    <h3 class="font-weight-light" style="margin-top:3%">Book and sail with confidence.</h3>
+    <p style="margin-top:3%; margin-left:20%; margin-right:20%">Afternoon tea served by white-gloved waiters, live music drifting around every corner, and some of the most spacious staterooms at sea. There’s cruising, and then there’s @GlobalConstants.SystemName.</p>
     <hr />
-    <h3 class="font-weight-light" style="margin-top:5%">Featured voyages.</h3>
+    <h3 class="font-weight-light" style="margin-top:3%">Featured voyages.</h3>
 
     <!-- Random Trips -->
-    <div class="row row-cols-1 row-cols-md-3 g-4" style="margin-top:5%;">
+    <div class="row row-cols-1 row-cols-md-3 g-4" style="margin-top:3%;">
         <div class="col">
             <div class="card h-100">
-                <img src=@firstTrip.PathName class="card-img-top" alt="...">
+                <img src=@firstTrip.PathName class="card-img-top" height="300" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">@firstTrip.DestinationName, @firstTrip.EndDate.Subtract(firstTrip.StartDate).Days nights</h5>
                     <p class="card-text">@firstTrip.DestinationDescription</p>
                 </div>
                 <div class="card-footer">
                     <p class="float-md-left font-weight-bold">$@firstTrip.Price per person</p>
-                    <a asp-controller="Trips" asp-action="ById" asp-route-id="@firstTrip.Id" class="float-md-right btn btn-info">View Details</a>
+                    <a asp-controller="Trips" asp-action="ById" asp-route-id="@firstTrip.Id" class="float-md-right btn btn-outline-info">View Details</a>
                 </div>
             </div>
         </div>
         <div class="col">
             <div class="card h-100">
-                <img src=@secondTrip.PathName class="card-img-top" alt="...">
+                <img src=@secondTrip.PathName class="card-img-top" height="300" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">@secondTrip.DestinationName, @secondTrip.EndDate.Subtract(secondTrip.StartDate).Days nights</h5>
                     <p class="card-text">@secondTrip.DestinationDescription</p>
                 </div>
                 <div class="card-footer">
                     <p class="float-md-left font-weight-bold">$@secondTrip.Price per person</p>
-                    <a asp-controller="Trips" asp-action="ById" asp-route-id="@secondTrip.Id" class="float-md-right btn btn-info">View Details</a>
+                    <a asp-controller="Trips" asp-action="ById" asp-route-id="@secondTrip.Id" class="float-md-right btn btn-outline-info">View Details</a>
                 </div>
             </div>
         </div>
         <div class="col">
             <div class="card h-100">
-                <img src=@thirdTrip.PathName class="card-img-top" alt="...">
+                <img src=@thirdTrip.PathName class="card-img-top" height="300" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">@thirdTrip.DestinationName, @thirdTrip.EndDate.Subtract(thirdTrip.StartDate).Days nights</h5>
                     <p class="card-text">@thirdTrip.DestinationDescription</p>
                 </div>
                 <div class="card-footer">
                     <p class="float-md-left font-weight-bold">$@thirdTrip.Price per person</p>
-                    <a asp-controller="Trips" asp-action="ById" asp-route-id="@thirdTrip.Id" class="float-md-right btn btn-info">View Details</a>
+                    <a asp-controller="Trips" asp-action="ById" asp-route-id="@thirdTrip.Id" class="float-md-right btn btn-outline-info">View Details</a>
                 </div>
             </div>
         </div>
     </div>
     <hr />
-    <!-- Ships -->
-    <h3 style="margin-top:5%;">@GlobalConstants.SystemName - The Fine Line.</h3>
-    <p style="margin-top:5%; margin-left:20%; margin-right:20%">Afternoon tea served by white-gloved waiters, live music drifting around every corner, and some of the most spacious staterooms at sea. There’s cruising, and then there’s @GlobalConstants.SystemName.</p>
-    <div class="card bg-dark text-white">
-        <img src="..." class="card-img" alt="...">
-        <div class="card-img-overlay">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            <p class="card-text">Last updated 3 mins ago</p>
-        </div>
-    </div>
 </div>
-
