@@ -1,0 +1,35 @@
+﻿@model EndlessJourney.Web.ViewModels.Ships.SingleShipViewModel
+@{
+    this.ViewData["Title"] = Model.Name;
+}
+
+<h2>Here is our beautiful ship - @this.ViewData["Title"]</h2>
+<hr />
+
+<div class="card mb-12" style="margin-top:3%">
+    <div class="row">
+        <div class="col-md-6">
+            <img src=@Model.ImagePathName class="img-fluid rounded-start" alt=@Model.Name>
+        </div>
+        <div class="col-md-6 text-center">
+            <div class="card-body">
+                <p class="card-text" style="font-size:18px">Sunlight can’t get from place to place without doing a little radiatin’. For example, let’s say Point “A” is the sun… so Point “B” is ME. I’m <span style="font-family:Georgia, 'Times New Roman', Times, serif;">@Model.Name™</span>, and I’m just a great little spot to feel some warmth on your skin and fun in your soul. Just remember the sunscreen.</p>
+                <ul style="list-style:none;margin-top:2%">
+                    <li>
+                        <span style="text-decoration-color:black;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;font-size:25px">Max capacity - @Model.Capacity</span>
+                        <i class="fa-solid fa-users"></i>
+                    </li>
+                    <li>
+                        <span style="text-decoration-color:black;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;font-size:25px">Our crew - @Model.Crew</span>
+                        <i class="fa-solid fa-anchor"></i>
+                    </li>
+                    <li>
+                        <span style="text-decoration-color:black;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;font-size:25px">Ship length - @Model.Length ft</span>
+                        <i class="fa-solid fa-ship"></i>
+                    </li>
+                </ul>
+                <p style="font-family:Algerian">@Model.Name has completed @Model.Trips.Count trips.</p>
+            </div>
+        </div>
+    </div>
+</div>

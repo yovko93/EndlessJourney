@@ -45,5 +45,10 @@
                 .Where(x => x.Id == id)
                 .To<TModel>()
                 .FirstOrDefaultAsync();
+
+        public async Task<int> GetCountAsync()
+          => await this.shipsRepository
+              .AllAsNoTracking()
+              .CountAsync();
     }
 }

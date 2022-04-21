@@ -10,5 +10,7 @@
         Task<IEnumerable<TModel>> GetAllAsync<TModel>();
 
         Task<TModel> GetByIdAsync<TModel>(int id);
+
+        Task<int> GetCountAsync();
     }
 }
