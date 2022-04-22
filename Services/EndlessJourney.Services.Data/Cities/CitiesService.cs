@@ -1,5 +1,6 @@
 ﻿namespace EndlessJourney.Services.Data.Cities
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -22,6 +23,15 @@
 
         public async Task CreateAsync(CreateCityInputModel cityModel)
         {
+            var isExist = this.citiesRepository
+                .AllAsNoTracking()
+                .Any(x => x.Name == cityModel.Name && x.CountryId == cityModel.CountryId);
+
+            if (isExist)
+            {
+                throw new Exception("City already exist!");
+            }
+
             var city = new City
             {
                 Name = cityModel.Name,
