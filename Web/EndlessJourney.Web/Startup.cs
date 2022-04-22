@@ -27,7 +27,7 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
-
+    using Microsoft.ApplicationInsights.Extensibility.PerfCounterCollector.QuickPulse;
     public class Startup
     {
         private readonly IConfiguration configuration;
@@ -60,6 +60,9 @@
                     }).AddRazorRuntimeCompilation();
             services.AddRazorPages();
             services.AddDatabaseDeveloperPageExceptionFilter();
+            services.AddApplicationInsightsTelemetry()
+                    .ConfigureTelemetryModule<QuickPulseTelemetryModule>((module, o)
+                        => module.AuthenticationApiKey = "cbe9b57e-4097-4dba-a81f-c5c599aff3fa");
 
             services.AddSingleton(this.configuration);
 
