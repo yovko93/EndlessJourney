@@ -4,7 +4,10 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public abstract class BaseTripInputModel
+    using EndlessJourney.Data.Models;
+    using EndlessJourney.Services.Mapping;
+
+    public abstract class BaseTripInputModel : IMapFrom<Trip>
     {
         [Display(Name = "Start date")]
         public DateTime StartDate { get; set; }
