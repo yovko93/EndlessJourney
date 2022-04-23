@@ -9,7 +9,7 @@
     {
         Task BookAsync(BookingInputModel bookingModel);
 
-        Task<IEnumerable<TModel>> GetAllByUserIdAsync<TModel>(string userId, int page, int itemsPerPage = 6);
+        Task<IEnumerable<TModel>> GetAllByUserIdAsync<TModel>(string userId);
 
         Task<int> GetCountByUserIdAsync(string userId);
     }

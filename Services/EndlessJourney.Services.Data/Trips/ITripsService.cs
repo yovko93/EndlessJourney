@@ -21,5 +21,7 @@
         Task<IEnumerable<TModel>> GetRandomAsync<TModel>(int count);
 
         Task DeleteAsync(string id);
+
+        IEnumerable<TModel> Latest<TModel>();
     }
 }

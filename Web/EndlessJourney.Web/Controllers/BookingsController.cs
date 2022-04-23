@@ -6,9 +6,10 @@
 
     using EndlessJourney.Services.Data.Bookings;
     using EndlessJourney.Web.ViewModels.Bookings;
-    using EndlessJourney.Web.ViewModels.Trips;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+
+    using static EndlessJourney.Common.GlobalConstants.Booking;
 
     public class BookingsController : Controller
     {
@@ -21,22 +22,13 @@
         }
 
         [Authorize]
-        public async Task<IActionResult> Mine(int id = 1)
+        public async Task<IActionResult> Mine()
         {
-            if (id <= 0)
-            {
-                return this.NotFound();
-            }
-
-            const int ItemsPerPage = 6;
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            var viewModel = new TripsListViewModel
+            var viewModel = new BookingsListViewModel
             {
-                ItemsPerPage = ItemsPerPage,
-                PageNumber = id,
-                Count = await this.bookingsService.GetCountByUserIdAsync(userId),
-                Trips = await this.bookingsService.GetAllByUserIdAsync<TripViewModel>(userId, id, ItemsPerPage),
+                Bookings = await this.bookingsService.GetAllByUserIdAsync<BookingViewModel>(userId),
             };
 
             return this.View(viewModel);
@@ -77,7 +69,7 @@
                 return this.RedirectToAction(nameof(TripsController.All), "Trips");
             }
 
-            this.TempData["Message"] = "Trip booked successfully!";
+            this.TempData["Message"] = TripBookedSuccessfully;
 
             return this.RedirectToAction(nameof(this.Mine));
         }

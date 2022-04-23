@@ -28,7 +28,6 @@
                               new RolesSeeder(),
                               new UsersSeeder(),
                               new CountriesSeeder(),
-                              new CitiesSeeder(),
                               new DestinationsSeeder(),
                               new BenefitsSeeder(),
                               new RoomsSeeder(),
@@ -37,7 +36,6 @@
                               new ShipRoomsSeeder(),
                               new TripsSeeder(),
                               new ImagesSeeder(),
-                              // new UserTripsSeeder(),
                           };
 
             foreach (var seeder in seeders)

@@ -9,7 +9,9 @@
     {
         Task CreateAsync(CreateCityInputModel cityModel);
 
-        Task<IEnumerable<TModel>> GetAllAsync<TModel>(int page, int itemsPerPage = 6);
+        Task<IEnumerable<TModel>> GetAllAsync<TModel>();
+
+        IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs();
 
         Task<TModel> GetByIdAsync<TModel>(int id);
 

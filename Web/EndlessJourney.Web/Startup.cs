@@ -27,6 +27,8 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using Microsoft.ApplicationInsights.Extensibility.PerfCounterCollector.QuickPulse;
+    using EndlessJourney.Services.Data.Rooms;
 
     public class Startup
     {
@@ -60,6 +62,9 @@
                     }).AddRazorRuntimeCompilation();
             services.AddRazorPages();
             services.AddDatabaseDeveloperPageExceptionFilter();
+            services.AddApplicationInsightsTelemetry()
+                    .ConfigureTelemetryModule<QuickPulseTelemetryModule>((module, o)
+                        => module.AuthenticationApiKey = "cbe9b57e-4097-4dba-a81f-c5c599aff3fa");
 
             services.AddSingleton(this.configuration);
 
@@ -77,6 +82,7 @@
             services.AddTransient<IBookingsService, BookingsService>();
             services.AddTransient<ICitiesService, CitiesService>();
             services.AddTransient<ICountriesService, CountriesService>();
+            services.AddTransient<IRoomsService, RoomsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

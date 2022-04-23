@@ -1,5 +1,6 @@
 ﻿namespace EndlessJourney.Services.Data.Cities
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -9,6 +10,8 @@
     using EndlessJourney.Services.Mapping;
     using EndlessJourney.Web.ViewModels.Cities;
     using Microsoft.EntityFrameworkCore;
+
+    using static EndlessJourney.Common.GlobalConstants.City;
 
     public class CitiesService : ICitiesService
     {
@@ -22,9 +25,19 @@
 
         public async Task CreateAsync(CreateCityInputModel cityModel)
         {
+            var isExist = this.citiesRepository
+                .AllAsNoTracking()
+                .Any(x => x.Name == cityModel.Name && x.CountryId == cityModel.CountryId);
+
+            if (isExist)
+            {
+                throw new Exception(CityAlreadyExist);
+            }
+
             var city = new City
             {
                 Name = cityModel.Name,
+                Description = cityModel.Description,
                 State = cityModel.State,
                 ImageUrl = cityModel.ImageUrl,
                 CountryId = cityModel.CountryId,
@@ -34,13 +47,26 @@
             await this.citiesRepository.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<TModel>> GetAllAsync<TModel>(int page, int itemsPerPage = 6)
+        public async Task<IEnumerable<TModel>> GetAllAsync<TModel>()
             => await this.citiesRepository
                 .AllAsNoTracking()
                 .OrderByDescending(x => x.Id)
-                .Skip((page - 1) * itemsPerPage).Take(itemsPerPage)
                 .To<TModel>()
                 .ToListAsync();
+
+        public IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs()
+        {
+            return this.citiesRepository
+                .AllAsNoTracking()
+                .Select(x => new
+                {
+                    x.Id,
+                    x.Name,
+                })
+                .OrderBy(x => x.Name)
+                .ToList()
+                .Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Name));
+        }
 
         public async Task<TModel> GetByIdAsync<TModel>(int id)
              => await this.citiesRepository
@@ -61,6 +87,7 @@
                 .FirstOrDefault(x => x.Id == id);
 
             city.Name = cityModel.Name;
+            city.Description = cityModel.Description;
             city.State = cityModel.State;
             city.ImageUrl = cityModel.ImageUrl;
             city.CountryId = cityModel.CountryId;

@@ -21,6 +21,14 @@
                     Discount = 5,
                     DestinationId = 1,
                     ShipId = 1,
+                    Images = new List<Image>()
+                    {
+                        new Image
+                        {
+                            PathName = "/images/trips/istockphoto-148543868-612x612.jpg",
+                            Extension = "jpg",
+                        },
+                    },
                 },
                 new Trip
                 {
@@ -30,6 +38,14 @@
                     Discount = 5,
                     DestinationId = 2,
                     ShipId = 2,
+                    Images = new List<Image>()
+                    {
+                        new Image
+                        {
+                            PathName = "/images/trips/istockphoto-509846884-612x612.jpg",
+                            Extension = "jpg",
+                        },
+                    },
                 },
                 new Trip
                 {
@@ -39,6 +55,21 @@
                     Discount = 25,
                     DestinationId = 3,
                     ShipId = 3,
+                    Images = new List<Image>()
+                    {
+                        new Image
+                        {
+                            TripId = null,
+                            PathName = "/images/trips/istockphoto-636665220-612x612.jpg",
+                            Extension = "jpg",
+                        },
+                        new Image
+                        {
+                            TripId = null,
+                            PathName = "/images/trips/istockphoto-1192581562-612x612.jpg",
+                            Extension = "jpg",
+                        },
+                    },
                 },
                 new Trip
                 {

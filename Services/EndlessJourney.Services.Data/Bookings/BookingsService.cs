@@ -11,6 +11,8 @@
     using EndlessJourney.Web.ViewModels.Bookings;
     using Microsoft.EntityFrameworkCore;
 
+    using static EndlessJourney.Common.GlobalConstants.Booking;
+
     public class BookingsService : IBookingsService
     {
         private readonly IDeletableEntityRepository<Booking> bookingsRepository;
@@ -53,18 +55,17 @@
 
             if (isBooked)
             {
-                throw new Exception("Trip is booked already!");
+                throw new Exception(AlreadyBooked);
             }
 
             await this.userTripsRepository.AddAsync(userTrip);
             await this.userTripsRepository.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<TModel>> GetAllByUserIdAsync<TModel>(string userId, int page, int itemsPerPage = 6)
+        public async Task<IEnumerable<TModel>> GetAllByUserIdAsync<TModel>(string userId)
             => await this.tripsRepository
                 .AllAsNoTracking()
                 .Where(x => x.Users.Any(x => x.UserId == userId))
-                .Skip((page - 1) * itemsPerPage).Take(itemsPerPage)
                 .To<TModel>()
                 .ToListAsync();
 

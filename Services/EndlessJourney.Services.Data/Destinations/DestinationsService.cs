@@ -1,5 +1,6 @@
 ﻿namespace EndlessJourney.Services.Data.Destinations
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -7,7 +8,10 @@
     using EndlessJourney.Data.Common.Repositories;
     using EndlessJourney.Data.Models;
     using EndlessJourney.Services.Mapping;
+    using EndlessJourney.Web.ViewModels.Destinations;
     using Microsoft.EntityFrameworkCore;
+
+    using static EndlessJourney.Common.GlobalConstants.Destination;
 
     public class DestinationsService : IDestinationsService
     {
@@ -17,6 +21,29 @@
             IDeletableEntityRepository<Destination> destinationsRepository)
         {
             this.destinationsRepository = destinationsRepository;
+        }
+
+        public async Task CreateAsync(CreateDestinationInputModel destinationModel)
+        {
+            var isExist = this.destinationsRepository
+                .AllAsNoTracking()
+                .Any(x => x.StartPointId == destinationModel.StartPointId && x.EndPointId == destinationModel.EndPointId);
+
+            if (isExist)
+            {
+                throw new Exception(DestinationAlreadyExist);
+            }
+
+            var destination = new Destination
+            {
+                Name = destinationModel.Name,
+                Description = destinationModel.Description,
+                StartPointId = destinationModel.StartPointId,
+                EndPointId = destinationModel.EndPointId,
+            };
+
+            await this.destinationsRepository.AddAsync(destination);
+            await this.destinationsRepository.SaveChangesAsync();
         }
 
         public IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs()
@@ -33,11 +60,10 @@
                 .Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Name));
         }
 
-        public async Task<IEnumerable<TModel>> GetAllAsync<TModel>(int page, int itemsPerPage = 6)
+        public async Task<IEnumerable<TModel>> GetAllAsync<TModel>()
         => await this.destinationsRepository
                 .AllAsNoTracking()
                 .OrderByDescending(x => x.Id)
-                .Skip((page - 1) * itemsPerPage).Take(itemsPerPage)
                 .To<TModel>()
                 .ToListAsync();
 
