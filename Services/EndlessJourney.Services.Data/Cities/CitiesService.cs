@@ -52,6 +52,20 @@
                 .To<TModel>()
                 .ToListAsync();
 
+        public IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs()
+        {
+            return this.citiesRepository
+                .AllAsNoTracking()
+                .Select(x => new
+                {
+                    x.Id,
+                    x.Name,
+                })
+                .OrderBy(x => x.Name)
+                .ToList()
+                .Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Name));
+        }
+
         public async Task<TModel> GetByIdAsync<TModel>(int id)
              => await this.citiesRepository
                 .AllAsNoTracking()

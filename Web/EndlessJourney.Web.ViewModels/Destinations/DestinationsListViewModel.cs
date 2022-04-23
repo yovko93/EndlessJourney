@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    public class DestinationListViewModel : PagingViewModel
+    public class DestinationsListViewModel
     {
         public IEnumerable<DestinationViewModel> Destinations { get; set; }
     }

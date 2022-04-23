@@ -11,6 +11,8 @@
 
         Task<IEnumerable<TModel>> GetAllAsync<TModel>();
 
+        IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs();
+
         Task<TModel> GetByIdAsync<TModel>(int id);
 
         Task<int> GetCountAsync();
