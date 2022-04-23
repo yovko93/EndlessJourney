@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
 
     using EndlessJourney.Services.Data.Cities;
+    using EndlessJourney.Services.Data.Countries;
     using EndlessJourney.Web.ViewModels.Cities;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -13,17 +14,21 @@
     public class CitiesController : Controller
     {
         private readonly ICitiesService citiesService;
+        private readonly ICountriesService countriesService;
 
         public CitiesController(
-            ICitiesService citiesService)
+            ICitiesService citiesService,
+            ICountriesService countriesService)
         {
             this.citiesService = citiesService;
+            this.countriesService = countriesService;
         }
 
         [Authorize(Roles = AdministratorRoleName)]
         public IActionResult Create()
         {
             var viewModel = new CreateCityInputModel();
+            viewModel.Countries = this.countriesService.GetAllAsKeyValuePairs();
             return this.View(viewModel);
         }
 
@@ -33,6 +38,7 @@
         {
             if (!this.ModelState.IsValid)
             {
+                inputModel.Countries = this.countriesService.GetAllAsKeyValuePairs();
                 return this.View(inputModel);
             }
 
@@ -43,6 +49,7 @@
             catch (Exception ex)
             {
                 this.ModelState.AddModelError(string.Empty, ex.Message);
+                inputModel.Countries = this.countriesService.GetAllAsKeyValuePairs();
                 return this.View(inputModel);
             }
 

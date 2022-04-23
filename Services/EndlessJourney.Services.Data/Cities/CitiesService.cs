@@ -35,6 +35,7 @@
             var city = new City
             {
                 Name = cityModel.Name,
+                Description = cityModel.Description,
                 State = cityModel.State,
                 ImageUrl = cityModel.ImageUrl,
                 CountryId = cityModel.CountryId,
@@ -44,11 +45,10 @@
             await this.citiesRepository.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<TModel>> GetAllAsync<TModel>(int page, int itemsPerPage = 6)
+        public async Task<IEnumerable<TModel>> GetAllAsync<TModel>()
             => await this.citiesRepository
                 .AllAsNoTracking()
                 .OrderByDescending(x => x.Id)
-                .Skip((page - 1) * itemsPerPage).Take(itemsPerPage)
                 .To<TModel>()
                 .ToListAsync();
 
@@ -71,6 +71,7 @@
                 .FirstOrDefault(x => x.Id == id);
 
             city.Name = cityModel.Name;
+            city.Description = cityModel.Description;
             city.State = cityModel.State;
             city.ImageUrl = cityModel.ImageUrl;
             city.CountryId = cityModel.CountryId;
