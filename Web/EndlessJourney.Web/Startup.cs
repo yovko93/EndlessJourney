@@ -28,6 +28,8 @@
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using Microsoft.ApplicationInsights.Extensibility.PerfCounterCollector.QuickPulse;
+    using EndlessJourney.Services.Data.Rooms;
+
     public class Startup
     {
         private readonly IConfiguration configuration;
@@ -80,6 +82,7 @@
             services.AddTransient<IBookingsService, BookingsService>();
             services.AddTransient<ICitiesService, CitiesService>();
             services.AddTransient<ICountriesService, CountriesService>();
+            services.AddTransient<IRoomsService, RoomsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
