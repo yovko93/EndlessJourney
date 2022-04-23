@@ -1,6 +1,6 @@
-﻿@model EndlessJourney.Web.ViewModels.Trips.TripsListViewModel
+﻿@model EndlessJourney.Web.ViewModels.Bookings.BookingsListViewModel
 @{
-    this.ViewData["Title"] = "My Trips - " + Model.Count;
+    this.ViewData["Title"] = "My Bookings";
 }
 
 @if (this.TempData.ContainsKey("Message"))
@@ -9,11 +9,11 @@
 }
 
 @{
-    var featureTrips = this.Model.Trips.Where(x => x.StartDate > DateTime.Now).ToList();
-    var lastTrips = this.Model.Trips.Where(x => x.StartDate < DateTime.Now).ToList();
+    var featureTrips = this.Model.Bookings.Where(x => x.StartDate > DateTime.Now).ToList();
+    var lastTrips = this.Model.Bookings.Where(x => x.StartDate < DateTime.Now).ToList();
 }
 
-<h2>All @this.ViewData["Title"]</h2>
+<h2>All @this.ViewData["Title"] - @Model.Bookings.Count()</h2>
 <hr />
 <h4 class="text-muted">My feature trips</h4>
 <hr />
@@ -25,15 +25,16 @@
                 <img src=@trip.PathName class="card-img-top" height="250" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">@trip.DestinationName</h5>
-                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <h6 class="card-title text-muted">Ship: @trip.ShipName</h6>
+                    <p class="card-text">@trip.StartDate.ToString("D") - @trip.EndDate.ToString("D")</p>
                 </div>
             </div>
         </div>
     }
 </div>
-<hr />
 @if (lastTrips.Count != 0)
 {
+    <hr />
     <h4 class="text-muted">My previous trips</h4>
     <hr />
     <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -44,7 +45,8 @@
                     <img src=@trip.PathName class="card-img-top" height="250" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">@trip.DestinationName</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <h6 class="card-title text-muted">Ship: @trip.ShipName</h6>
+                        <p class="card-text">@trip.StartDate.ToString("D") - @trip.EndDate.ToString("D")</p>
                     </div>
                 </div>
             </div>

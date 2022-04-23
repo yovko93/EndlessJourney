@@ -23,20 +23,11 @@
         [Authorize]
         public async Task<IActionResult> Mine(int id = 1)
         {
-            if (id <= 0)
-            {
-                return this.NotFound();
-            }
-
-            const int ItemsPerPage = 6;
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            var viewModel = new TripsListViewModel
+            var viewModel = new BookingsListViewModel
             {
-                ItemsPerPage = ItemsPerPage,
-                PageNumber = id,
-                Count = await this.bookingsService.GetCountByUserIdAsync(userId),
-                Trips = await this.bookingsService.GetAllByUserIdAsync<TripViewModel>(userId, id, ItemsPerPage),
+                Bookings = await this.bookingsService.GetAllByUserIdAsync<BookingViewModel>(userId),
             };
 
             return this.View(viewModel);

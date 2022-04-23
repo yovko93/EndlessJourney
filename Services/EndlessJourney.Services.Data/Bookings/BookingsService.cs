@@ -60,11 +60,10 @@
             await this.userTripsRepository.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<TModel>> GetAllByUserIdAsync<TModel>(string userId, int page, int itemsPerPage = 6)
+        public async Task<IEnumerable<TModel>> GetAllByUserIdAsync<TModel>(string userId)
             => await this.tripsRepository
                 .AllAsNoTracking()
                 .Where(x => x.Users.Any(x => x.UserId == userId))
-                .Skip((page - 1) * itemsPerPage).Take(itemsPerPage)
                 .To<TModel>()
                 .ToListAsync();
 
