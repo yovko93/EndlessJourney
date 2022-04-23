@@ -9,6 +9,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
+    using static EndlessJourney.Common.GlobalConstants.Destination;
     using static EndlessJourney.Common.GlobalConstants.RolesNamesConstants;
 
     public class DestinationsController : Controller
@@ -62,12 +63,12 @@
 
                 this.TempData["Message"] = ex.Message;
 
-                return this.RedirectToAction(nameof(DestinationsController.All), "Destinations");
+                return this.RedirectToAction(nameof(this.All));
             }
 
-            this.TempData["Message"] = "Destination added successfully.";
+            this.TempData["Message"] = DestinationAdded;
 
-            return this.RedirectToAction(nameof(DestinationsController.All), "Destinations");
+            return this.RedirectToAction(nameof(this.All));
         }
     }
 }

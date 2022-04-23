@@ -11,6 +11,8 @@
     using EndlessJourney.Web.ViewModels.Destinations;
     using Microsoft.EntityFrameworkCore;
 
+    using static EndlessJourney.Common.GlobalConstants.Destination;
+
     public class DestinationsService : IDestinationsService
     {
         private readonly IDeletableEntityRepository<Destination> destinationsRepository;
@@ -29,7 +31,7 @@
 
             if (isExist)
             {
-                throw new Exception("Destination already exist!");
+                throw new Exception(DestinationAlreadyExist);
             }
 
             var destination = new Destination

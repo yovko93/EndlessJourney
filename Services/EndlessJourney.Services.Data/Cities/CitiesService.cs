@@ -11,6 +11,8 @@
     using EndlessJourney.Web.ViewModels.Cities;
     using Microsoft.EntityFrameworkCore;
 
+    using static EndlessJourney.Common.GlobalConstants.City;
+
     public class CitiesService : ICitiesService
     {
         private readonly IDeletableEntityRepository<City> citiesRepository;
@@ -29,7 +31,7 @@
 
             if (isExist)
             {
-                throw new Exception("City already exist!");
+                throw new Exception(CityAlreadyExist);
             }
 
             var city = new City

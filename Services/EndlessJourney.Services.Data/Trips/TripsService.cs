@@ -11,6 +11,8 @@
     using EndlessJourney.Web.ViewModels.Trips;
     using Microsoft.EntityFrameworkCore;
 
+    using static EndlessJourney.Common.GlobalConstants.Trip;
+
     public class TripsService : ITripsService
     {
         private readonly IDeletableEntityRepository<Trip> tripsRepository;
@@ -50,7 +52,7 @@
 
             if (trip == null)
             {
-                throw new Exception("Trip not found!");
+                throw new Exception(TripNotFound);
             }
 
             this.tripsRepository.Delete(trip);

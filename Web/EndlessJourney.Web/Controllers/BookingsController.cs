@@ -9,6 +9,8 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
+    using static EndlessJourney.Common.GlobalConstants.Booking;
+
     public class BookingsController : Controller
     {
         private readonly IBookingsService bookingsService;
@@ -67,7 +69,7 @@
                 return this.RedirectToAction(nameof(TripsController.All), "Trips");
             }
 
-            this.TempData["Message"] = "Trip booked successfully!";
+            this.TempData["Message"] = TripBookedSuccessfully;
 
             return this.RedirectToAction(nameof(this.Mine));
         }

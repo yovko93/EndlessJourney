@@ -11,6 +11,8 @@
     using EndlessJourney.Web.ViewModels.Bookings;
     using Microsoft.EntityFrameworkCore;
 
+    using static EndlessJourney.Common.GlobalConstants.Booking;
+
     public class BookingsService : IBookingsService
     {
         private readonly IDeletableEntityRepository<Booking> bookingsRepository;
@@ -53,7 +55,7 @@
 
             if (isBooked)
             {
-                throw new Exception("Trip is booked already!");
+                throw new Exception(AlreadyBooked);
             }
 
             await this.userTripsRepository.AddAsync(userTrip);

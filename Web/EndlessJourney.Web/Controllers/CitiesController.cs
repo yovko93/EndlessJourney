@@ -9,6 +9,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
+    using static EndlessJourney.Common.GlobalConstants.City;
     using static EndlessJourney.Common.GlobalConstants.RolesNamesConstants;
 
     public class CitiesController : Controller
@@ -63,12 +64,12 @@
 
                 this.TempData["Message"] = ex.Message;
 
-                return this.RedirectToAction(nameof(CitiesController.All), "Cities");
+                return this.RedirectToAction(nameof(this.All));
             }
 
-            this.TempData["Message"] = "City added successfully.";
+            this.TempData["Message"] = CityAdded;
 
-            return this.RedirectToAction(nameof(CitiesController.All), "Cities");
+            return this.RedirectToAction(nameof(this.All));
         }
     }
 }

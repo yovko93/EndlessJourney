@@ -14,6 +14,7 @@
     using Microsoft.AspNetCore.Mvc;
 
     using static EndlessJourney.Common.GlobalConstants.RolesNamesConstants;
+    using static EndlessJourney.Common.GlobalConstants.Trip;
 
     public class TripsController : Controller
     {
@@ -100,12 +101,13 @@
             catch (Exception ex)
             {
                 this.ModelState.AddModelError(string.Empty, ex.Message);
-                inputModel.Destinations = this.destinationsService.GetAllAsKeyValuePairs();
-                inputModel.Ships = this.shipsService.GetAllAsKeyValuePairs();
+
+                this.TempData["Message"] = ex.Message;
+
                 return this.View(inputModel);
             }
 
-            this.TempData["Message"] = "Trip added successfully.";
+            this.TempData["Message"] = TripAdded;
 
             return this.RedirectToAction(nameof(this.All));
         }
