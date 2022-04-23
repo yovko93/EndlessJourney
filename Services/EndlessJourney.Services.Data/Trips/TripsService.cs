@@ -50,7 +50,7 @@
 
             if (trip == null)
             {
-                // TODO:
+                throw new Exception("Trip not found!");
             }
 
             this.tripsRepository.Delete(trip);

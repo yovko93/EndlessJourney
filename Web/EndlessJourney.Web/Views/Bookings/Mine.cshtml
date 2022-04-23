@@ -8,14 +8,21 @@
     <div class="alert alert-success">@this.TempData["Message"]</div>
 }
 
-<h1>@this.ViewData["Title"]</h1>
+@{
+    var featureTrips = this.Model.Trips.Where(x => x.StartDate > DateTime.Now).ToList();
+    var lastTrips = this.Model.Trips.Where(x => x.StartDate < DateTime.Now).ToList();
+}
+
+<h2>All @this.ViewData["Title"]</h2>
+<hr />
+<h4 class="text-muted">My feature trips</h4>
 <hr />
 <div class="row row-cols-1 row-cols-md-3 g-4">
-    @foreach (var trip in this.Model.Trips)
+    @foreach (var trip in featureTrips)
     {
         <div class="col">
-            <div class="card">
-                <img src=@trip.PathName class="card-img-top" alt="...">
+            <div class="card h-100">
+                <img src=@trip.PathName class="card-img-top" height="250" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">@trip.DestinationName</h5>
                     <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
@@ -25,4 +32,23 @@
     }
 </div>
 <hr />
-<partial name="_PagingPartial" model="@Model" />
+@if (lastTrips.Count != 0)
+{
+    <h4 class="text-muted">My previous trips</h4>
+    <hr />
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach (var trip in lastTrips)
+        {
+            <div class="col">
+                <div class="card h-100">
+                    <img src=@trip.PathName class="card-img-top" height="250" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">@trip.DestinationName</h5>
+                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
