@@ -4,16 +4,20 @@
 @inject UserManager<ApplicationUser> UserManager
 @using static EndlessJourney.Common.GlobalConstants.RolesNamesConstants;
 
+@{ 
+    var userName = this.User.Identity.Name.Split('@')[0];
+}
+
 <ul class="navbar-nav">
     @if (this.SignInManager.IsSignedIn(this.User))
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @this.User.Identity.Name!</a>
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @userName!</a>
         </li>
         if (this.User.IsInRole(AdministratorRoleName))
         {
             <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="Administration" asp-controller="Dashboard" asp-action="Index" title="Admin">Admin</a>
+                <a class="nav-link text-dark" asp-area="Administration" asp-controller="Dashboard" asp-action="Index" title="Admin">Dashboard</a>
             </li>
         }
         else
