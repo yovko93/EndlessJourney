@@ -8,7 +8,6 @@
 
         public string TripId { get; set; }
 
-        // public int? ShipId { get; set; }
         public string PathName { get; set; }
 
         public string Extension { get; set; }

@@ -24,6 +24,17 @@
             this.countriesService = countriesService;
         }
 
+        public async Task<IActionResult> All()
+        {
+            var viewModel = new CitiesListViewModel
+            {
+                Cities = await this.citiesService.GetAllAsync<CityViewModel>(),
+                Count = await this.citiesService.GetCountAsync(),
+            };
+
+            return this.View(viewModel);
+        }
+
         [Authorize(Roles = AdministratorRoleName)]
         public IActionResult Create()
         {
@@ -55,7 +66,7 @@
 
             this.TempData["Message"] = "City added successfully.";
 
-            return this.RedirectToAction(nameof(DestinationsController.All), "Destinations");
+            return this.RedirectToAction(nameof(CitiesController.All), "Cities");
         }
     }
 }

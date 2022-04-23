@@ -16,6 +16,7 @@
         [Required]
         public string ImageUrl { get; set; }
 
+        [Display(Name = "Country")]
         public int CountryId { get; set; }
 
         public IEnumerable<KeyValuePair<string, string>> Countries { get; set; }
