@@ -8,5 +8,10 @@
         {
             public const string AdministratorRoleName = "Administrator";
         }
+
+        public class Cache
+        {
+            public const string LatestTripsCacheKey = nameof(LatestTripsCacheKey);
+        }
     }
 }

@@ -6,7 +6,6 @@
 
     using EndlessJourney.Services.Data.Bookings;
     using EndlessJourney.Web.ViewModels.Bookings;
-    using EndlessJourney.Web.ViewModels.Trips;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
@@ -21,7 +20,7 @@
         }
 
         [Authorize]
-        public async Task<IActionResult> Mine(int id = 1)
+        public async Task<IActionResult> Mine()
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 

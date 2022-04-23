@@ -104,5 +104,13 @@
 
             await this.tripsRepository.SaveChangesAsync();
         }
+
+        public IEnumerable<TModel> Latest<TModel>()
+            => this.tripsRepository
+                .All()
+                .OrderByDescending(c => c.Id)
+                .To<TModel>()
+                .Take(3)
+                .ToList();
     }
 }

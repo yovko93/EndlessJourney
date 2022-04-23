@@ -6,6 +6,6 @@
 
     public class HomeViewModel
     {
-        public IEnumerable<TripViewModel> Trips { get; set; }
+        public IEnumerable<LatestTripViewModel> Trips { get; set; }
     }
 }
