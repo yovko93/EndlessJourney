@@ -5,15 +5,16 @@
 
     public abstract class BaseCityInputModel
     {
-        [Required]
+        [Required(ErrorMessage = "Please enter city name.")]
         public string Name { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please enter city description.")]
+        [StringLength(200, MinimumLength = 10)]
         public string Description { get; set; }
 
         public string State { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please enter imageUrl.")]
         public string ImageUrl { get; set; }
 
         [Display(Name = "Country")]

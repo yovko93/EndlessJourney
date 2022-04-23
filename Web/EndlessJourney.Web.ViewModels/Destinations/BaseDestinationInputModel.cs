@@ -5,10 +5,12 @@
 
     public class BaseDestinationInputModel
     {
-        [Required]
+        [Required(ErrorMessage = "Please enter destination description.")]
+        [StringLength(30, MinimumLength = 3)]
         public string Name { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please enter destination description.")]
+        [StringLength(200, MinimumLength = 10)]
         public string Description { get; set; }
 
         [Display(Name = "Start Point")]

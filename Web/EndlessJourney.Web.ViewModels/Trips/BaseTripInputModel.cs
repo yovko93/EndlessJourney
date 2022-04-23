@@ -15,6 +15,7 @@
         [Display(Name = "End date")]
         public DateTime EndDate { get; set; }
 
+        [Required(ErrorMessage = "Please enter a valid trip price.")]
         public decimal Price { get; set; }
 
         public int? Discount { get; set; }
