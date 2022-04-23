@@ -1,4 +1,5 @@
 ﻿@model EndlessJourney.Web.ViewModels.Trips.TripsListViewModel
+@using static EndlessJourney.Common.GlobalConstants.RolesNamesConstants
 @{
     this.ViewData["Title"] = "All Trips, page " + Model.PageNumber;
 }
@@ -10,13 +11,16 @@
 
 <h1>@this.ViewData["Title"]</h1>
 <hr />
-<div>
-    <ul style="list-style:none">
-        <li class="nav-item">
-            <a class="float-md-none alert btn btn-secondary" asp-area="" asp-controller="Trips" asp-action="Create">Create Trip</a>
-        </li>
-    </ul>
-</div>
+@if (this.User.IsInRole(AdministratorRoleName))
+{
+    <div>
+        <ul style="list-style:none">
+            <li class="nav-item">
+                <a class="float-md-none alert btn btn-outline-secondary" asp-area="" asp-controller="Trips" asp-action="Create">Create Trip</a>
+            </li>
+        </ul>
+    </div>
+}
 @foreach (var trip in this.Model.Trips)
 {
     <div>

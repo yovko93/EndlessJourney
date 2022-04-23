@@ -1,4 +1,5 @@
 ﻿@model EndlessJourney.Web.ViewModels.Cities.CitiesListViewModel
+@using static EndlessJourney.Common.GlobalConstants.RolesNamesConstants
 @{
     this.ViewData["Title"] = "All Cities";
 }
@@ -10,15 +11,16 @@
 
 <h2>@this.ViewData["Title"] - @Model.Count</h2>
 <hr />
-
-<div>
-    <ul style="list-style:none">
-        <li class="nav-item">
-            <a class="float-md-none alert btn btn-secondary" asp-area="" asp-controller="Cities" asp-action="Create">Create City</a>
-        </li>
-    </ul>
-</div>
-
+@if (this.User.IsInRole(AdministratorRoleName))
+{
+    <div>
+        <ul style="list-style:none">
+            <li class="nav-item">
+                <a class="float-md-none alert btn btn-outline-secondary" asp-area="" asp-controller="Cities" asp-action="Create">Create City</a>
+            </li>
+        </ul>
+    </div>
+}
 <div class="row row-cols-1 row-cols-md-2 g-4">
     @foreach (var city in this.Model.Cities)
     {
