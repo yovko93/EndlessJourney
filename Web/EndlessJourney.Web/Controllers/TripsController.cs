@@ -13,6 +13,7 @@
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
 
+    using static EndlessJourney.Common.GlobalConstants;
     using static EndlessJourney.Common.GlobalConstants.RolesNamesConstants;
     using static EndlessJourney.Common.GlobalConstants.Trip;
 
@@ -102,12 +103,15 @@
             {
                 this.ModelState.AddModelError(string.Empty, ex.Message);
 
-                this.TempData["Message"] = ex.Message;
+                inputModel.Destinations = this.destinationsService.GetAllAsKeyValuePairs();
+                inputModel.Ships = this.shipsService.GetAllAsKeyValuePairs();
+
+                this.TempData[Message] = ex.Message;
 
                 return this.View(inputModel);
             }
 
-            this.TempData["Message"] = TripAdded;
+            this.TempData[Message] = TripAdded;
 
             return this.RedirectToAction(nameof(this.All));
         }
@@ -142,6 +146,11 @@
         [Authorize(Roles = AdministratorRoleName)]
         public async Task<IActionResult> Delete(string id)
         {
+            if (id == null)
+            {
+                return this.NotFound();
+            }
+
             await this.tripsService.DeleteAsync(id);
             return this.RedirectToAction(nameof(this.All));
         }

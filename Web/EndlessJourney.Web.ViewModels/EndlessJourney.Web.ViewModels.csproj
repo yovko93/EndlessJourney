@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Data\EndlessJourney.Data.Models\EndlessJourney.Data.Models.csproj" />
+    <ProjectReference Include="..\..\EndlessJourney.Common\EndlessJourney.Common.csproj" />
     <ProjectReference Include="..\..\Services\EndlessJourney.Services.Mapping\EndlessJourney.Services.Mapping.csproj" />
   </ItemGroup>
 

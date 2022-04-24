@@ -3,20 +3,22 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
+    using static EndlessJourney.Common.GlobalConstants.Destination;
+
     public class BaseDestinationInputModel
     {
-        [Required(ErrorMessage = "Please enter destination description.")]
-        [StringLength(30, MinimumLength = 3)]
+        [Required(ErrorMessage = EnterDestinationName)]
+        [StringLength(MaximumNameLength, MinimumLength = MinimumNameLength)]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Please enter destination description.")]
-        [StringLength(200, MinimumLength = 10)]
+        [Required(ErrorMessage = EnterDestinationDescription)]
+        [StringLength(MaximumDescriptionLength, MinimumLength = MinimumDescriptionLength)]
         public string Description { get; set; }
 
-        [Display(Name = "Start Point")]
+        [Display(Name = StartPoint)]
         public int StartPointId { get; set; }
 
-        [Display(Name = "End Point")]
+        [Display(Name = EndPoint)]
         public int EndPointId { get; set; }
 
         public IEnumerable<KeyValuePair<string, string>> Cities { get; set; }

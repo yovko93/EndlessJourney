@@ -9,6 +9,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
+    using static EndlessJourney.Common.GlobalConstants;
     using static EndlessJourney.Common.GlobalConstants.Booking;
 
     public class BookingsController : Controller
@@ -64,12 +65,12 @@
             {
                 this.ModelState.AddModelError(string.Empty, ex.Message);
 
-                this.TempData["Message"] = ex.Message;
+                this.TempData[Message] = ex.Message;
 
                 return this.RedirectToAction(nameof(TripsController.All), "Trips");
             }
 
-            this.TempData["Message"] = TripBookedSuccessfully;
+            this.TempData[Message] = TripBookedSuccessfully;
 
             return this.RedirectToAction(nameof(this.Mine));
         }

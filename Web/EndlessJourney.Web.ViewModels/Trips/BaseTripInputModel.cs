@@ -7,23 +7,30 @@
     using EndlessJourney.Data.Models;
     using EndlessJourney.Services.Mapping;
 
+    using static EndlessJourney.Common.GlobalConstants.Destination;
+    using static EndlessJourney.Common.GlobalConstants.Ship;
+    using static EndlessJourney.Common.GlobalConstants.Trip;
+
     public abstract class BaseTripInputModel : IMapFrom<Trip>
     {
-        [Display(Name = "Start date")]
+        [Display(Name = StartDateInput)]
         public DateTime StartDate { get; set; }
 
-        [Display(Name = "End date")]
+        [Display(Name = EndDateInput)]
         public DateTime EndDate { get; set; }
 
-        [Required(ErrorMessage = "Please enter a valid trip price.")]
+        [Required(ErrorMessage = EnterValidPrice)]
         public decimal Price { get; set; }
 
         public int? Discount { get; set; }
 
+        [Display(Name = ShipName)]
+        [Required(ErrorMessage = ShipCannotBeNull)]
         public int ShipId { get; set; }
 
         public IEnumerable<KeyValuePair<string, string>> Ships { get; set; }
 
+        [Required(ErrorMessage = DestinationCannotBeNull)]
         public int DestinationId { get; set; }
 
         public IEnumerable<KeyValuePair<string, string>> Destinations { get; set; }

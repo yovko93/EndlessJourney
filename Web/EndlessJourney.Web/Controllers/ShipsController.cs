@@ -31,6 +31,11 @@
             var ship = await this.shipsService
                 .GetByIdAsync<SingleShipViewModel>(id);
 
+            if (ship == null)
+            {
+                return this.NotFound();
+            }
+
             return this.View(ship);
         }
     }

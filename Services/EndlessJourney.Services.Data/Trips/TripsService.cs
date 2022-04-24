@@ -11,6 +11,7 @@
     using EndlessJourney.Web.ViewModels.Trips;
     using Microsoft.EntityFrameworkCore;
 
+    using static EndlessJourney.Common.GlobalConstants.Ship;
     using static EndlessJourney.Common.GlobalConstants.Trip;
 
     public class TripsService : ITripsService
@@ -25,6 +26,34 @@
 
         public async Task CreateAsync(CreateTripInputModel tripModel, IEnumerable<Image> images)
         {
+            if (tripModel.StartDate > tripModel.EndDate)
+            {
+                throw new Exception(StartBeforeEndDate);
+            }
+
+            var isShipBusy = this.tripsRepository
+                .AllAsNoTracking()
+                .Any(x =>
+                    x.StartDate.Date == tripModel.StartDate.Date
+                        && x.ShipId == tripModel.ShipId);
+
+            if (isShipBusy)
+            {
+                throw new Exception(ShipIsBusy);
+            }
+
+            var isExist = this.tripsRepository
+                .AllAsNoTracking()
+                .Any(x =>
+                    x.DestinationId == tripModel.DestinationId
+                    && x.ShipId == tripModel.ShipId
+                    && x.StartDate.Date == tripModel.StartDate.Date);
+
+            if (isExist)
+            {
+                throw new Exception(TripExistAlready);
+            }
+
             var trip = new Trip
             {
                 StartDate = tripModel.StartDate,
@@ -93,6 +122,11 @@
 
         public async Task UpdateAsync(string id, EditTripInputModel tripModel)
         {
+            if (id == null)
+            {
+                throw new Exception(TripNotFound);
+            }
+
             var trip = this.tripsRepository
                 .All()
                 .FirstOrDefault(x => x.Id == id);

@@ -3,21 +3,25 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
+    using static EndlessJourney.Common.GlobalConstants.City;
+    using static EndlessJourney.Common.GlobalConstants.Country;
+
     public abstract class BaseCityInputModel
     {
-        [Required(ErrorMessage = "Please enter city name.")]
+        [Required(ErrorMessage = EnterCityName)]
+        [StringLength(MaximumNameLength, MinimumLength = MinimumNameLength)]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Please enter city description.")]
-        [StringLength(200, MinimumLength = 10)]
+        [Required(ErrorMessage = EnterCityDescription)]
+        [StringLength(MaximumDescriptionLength, MinimumLength = MinimumDescriptionLength)]
         public string Description { get; set; }
 
         public string State { get; set; }
 
-        [Required(ErrorMessage = "Please enter imageUrl.")]
+        [Required(ErrorMessage = EnterCityImage)]
         public string ImageUrl { get; set; }
 
-        [Display(Name = "Country")]
+        [Display(Name = CountryName)]
         public int CountryId { get; set; }
 
         public IEnumerable<KeyValuePair<string, string>> Countries { get; set; }
