@@ -13,6 +13,7 @@
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
 
+    using static EndlessJourney.Common.GlobalConstants;
     using static EndlessJourney.Common.GlobalConstants.RolesNamesConstants;
     using static EndlessJourney.Common.GlobalConstants.Trip;
 
@@ -105,12 +106,12 @@
                 inputModel.Destinations = this.destinationsService.GetAllAsKeyValuePairs();
                 inputModel.Ships = this.shipsService.GetAllAsKeyValuePairs();
 
-                this.TempData["Message"] = ex.Message;
+                this.TempData[Message] = ex.Message;
 
                 return this.View(inputModel);
             }
 
-            this.TempData["Message"] = TripAdded;
+            this.TempData[Message] = TripAdded;
 
             return this.RedirectToAction(nameof(this.All));
         }
