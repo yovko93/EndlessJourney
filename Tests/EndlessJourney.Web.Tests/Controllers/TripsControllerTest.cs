@@ -5,17 +5,16 @@
 
     using EndlessJourney.Data.Models;
     using EndlessJourney.Web.Controllers;
-    using EndlessJourney.Web.ViewModels.Home;
-    using FluentAssertions;
+    using EndlessJourney.Web.ViewModels.Trips;
     using MyTested.AspNetCore.Mvc;
     using Shouldly;
     using Xunit;
 
-    public class HomeControllerTest
+    public class TripsControllerTest
     {
         [Fact]
         public void AllShouldReturnCorrectTrips()
-            => MyController<HomeController>
+            => MyController<TripsController>
                 .Instance()
                 .WithData(new Trip
                 {
@@ -53,33 +52,54 @@
                         Capacity = 1,
                     },
                 })
-                .Calling(c => c.Index())
+                .Calling(c => c.All(1))
                 .ShouldReturn()
                 .View(result => result
-                    .WithModelOfType<HomeViewModel>()
+                    .WithModelOfType<TripsListViewModel>()
                     .Passing(model =>
                     {
-                        model.Trips.Count().ShouldBe(1);
+                        model.PageNumber.ShouldBe(1);
+                        model.ItemsPerPage.ShouldBe(6);
+                        model.Count.ShouldBe(1);
                         model.Trips.FirstOrDefault(trip => trip.DestinationName == "Test").ShouldNotBeNull();
                     }));
 
         [Fact]
-        public void IndexShouldReturnCorrectViewWithModel()
-            => MyController<HomeController>
-                .Instance(controller => controller
-                    .WithData(Trips.GetTrips(1)))
-                .Calling(c => c.Index())
-                .ShouldReturn()
-                .View(view => view
-                    .WithModelOfType<HomeViewModel>()
-                    .Passing(model => model.Should().NotBeNull()));
+        public void PostCreateShouldBeAllowedOnlyForPostRequestAndAuthorizedUsers()
+            => MyController<TripsController>
+                .Instance()
+                .Calling(c => c.Create(With.Default<CreateTripInputModel>()))
+                .ShouldHave()
+                .ActionAttributes(attributes => attributes
+                    .RestrictingForAuthorizedRequests()
+                    .RestrictingForHttpMethod(HttpMethod.Post));
 
         [Fact]
-        public void ErrorShouldReturnView()
-            => MyController<HomeController>
+        public void PostCreateShouldReturnViewWithTheSameModelWhenStateIsInvalid()
+            => MyController<TripsController>
                 .Instance()
-                .Calling(c => c.Error())
+                .Calling(c => c.Create(With.Default<CreateTripInputModel>()))
+                .ShouldHave()
+                .InvalidModelState()
+                .AndAlso()
                 .ShouldReturn()
-                .View();
+                .View(result => result
+                    .WithModelOfType<CreateTripInputModel>()
+                    .Passing(trip => trip.Images.ShouldBeNull()));
+
+        [Fact]
+        public void DeleteShouldReturnNotFoundWhenInvalidId()
+            => MyController<TripsController>
+                .Calling(c => c.Delete(With.Any<string>()))
+                .ShouldReturn()
+                .NotFound();
+
+        [Fact]
+        public void DeleteShouldHaveRestrictionsForAuthorizedUsers()
+            => MyController<TripsController>
+                .Calling(c => c.Delete(With.Any<string>()))
+                .ShouldHave()
+                .ActionAttributes(attrs => attrs
+                    .RestrictingForAuthorizedRequests());
     }
 }

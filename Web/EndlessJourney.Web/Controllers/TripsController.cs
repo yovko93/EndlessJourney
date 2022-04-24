@@ -146,6 +146,11 @@
         [Authorize(Roles = AdministratorRoleName)]
         public async Task<IActionResult> Delete(string id)
         {
+            if (id == null)
+            {
+                return this.NotFound();
+            }
+
             await this.tripsService.DeleteAsync(id);
             return this.RedirectToAction(nameof(this.All));
         }
