@@ -1,17 +1,14 @@
-﻿using EndlessJourney.Data;
-using EndlessJourney.Data.Common.Repositories;
-using EndlessJourney.Data.Models;
-using EndlessJourney.Data.Repositories;
-using EndlessJourney.Services.Data.Destinations;
-using Microsoft.EntityFrameworkCore;
-using Moq;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Xunit;
-
-namespace EndlessJourney.Services.Data.Tests
+﻿namespace EndlessJourney.Services.Data.Tests
 {
+    using System.Threading.Tasks;
+
+    using EndlessJourney.Data;
+    using EndlessJourney.Data.Models;
+    using EndlessJourney.Data.Repositories;
+    using EndlessJourney.Services.Data.Destinations;
+    using Microsoft.EntityFrameworkCore;
+    using Xunit;
+
     public class DestinationsServiceTest
     {
         [Fact]
