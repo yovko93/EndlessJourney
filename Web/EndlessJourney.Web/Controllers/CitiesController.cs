@@ -9,6 +9,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
+    using static EndlessJourney.Common.GlobalConstants;
     using static EndlessJourney.Common.GlobalConstants.City;
     using static EndlessJourney.Common.GlobalConstants.RolesNamesConstants;
 
@@ -62,12 +63,14 @@
             {
                 this.ModelState.AddModelError(string.Empty, ex.Message);
 
-                this.TempData["Message"] = ex.Message;
+                this.TempData[Message] = ex.Message;
 
-                return this.RedirectToAction(nameof(this.All));
+                inputModel.Countries = this.countriesService.GetAllAsKeyValuePairs();
+
+                return this.View(inputModel);
             }
 
-            this.TempData["Message"] = CityAdded;
+            this.TempData[Message] = CityAdded;
 
             return this.RedirectToAction(nameof(this.All));
         }

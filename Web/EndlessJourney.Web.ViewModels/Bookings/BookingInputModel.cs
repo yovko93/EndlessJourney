@@ -2,17 +2,19 @@
 {
     using System.ComponentModel.DataAnnotations;
 
+    using static EndlessJourney.Common.GlobalConstants.Booking;
+
     public class BookingInputModel
     {
         [Required]
-        [Range(1, 4)]
-        [Display(Name = "Adults (18+)")]
+        [Range(MinimumAdults, MaximumAdults)]
+        [Display(Name = AdultsOver18)]
         public int Adult { get; set; }
 
-        [Display(Name = "Children (2-17 years)")]
+        [Display(Name = ChildrenBetween2And17Y)]
         public int Children { get; set; }
 
-        [Display(Name = "Infants (6-23 months)")]
+        [Display(Name = ChildrenBetween6And23M)]
         public int Infant { get; set; }
 
         public string TripId { get; set; }

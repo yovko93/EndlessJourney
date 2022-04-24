@@ -63,7 +63,9 @@
 
                 this.TempData["Message"] = ex.Message;
 
-                return this.RedirectToAction(nameof(this.All));
+                inputModel.Cities = this.citiesService.GetAllAsKeyValuePairs();
+
+                return this.View(inputModel);
             }
 
             this.TempData["Message"] = DestinationAdded;

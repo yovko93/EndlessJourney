@@ -102,6 +102,9 @@
             {
                 this.ModelState.AddModelError(string.Empty, ex.Message);
 
+                inputModel.Destinations = this.destinationsService.GetAllAsKeyValuePairs();
+                inputModel.Ships = this.shipsService.GetAllAsKeyValuePairs();
+
                 this.TempData["Message"] = ex.Message;
 
                 return this.View(inputModel);
