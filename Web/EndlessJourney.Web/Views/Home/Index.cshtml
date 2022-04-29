@@ -4,7 +4,7 @@
     this.ViewData["Title"] = "Home Page";
 }
 
-@{ 
+@{
     var trips = this.Model.Trips.ToArray();
     var firstTrip = trips.Any() ? trips[0] : null;
     var secondTrip = trips.Length > 1 ? trips[1] : null;

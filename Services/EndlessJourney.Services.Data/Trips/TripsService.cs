@@ -104,6 +104,13 @@
                 .To<TModel>()
                 .FirstOrDefaultAsync();
 
+        public async Task<decimal> GetTripPriceAsync(string id)
+            => await this.tripsRepository
+                .AllAsNoTracking()
+                .Where(x => x.Id == id)
+                .Select(x => x.Price)
+                .FirstOrDefaultAsync();
+
         public async Task<int> GetCountAsync()
            => await this.tripsRepository
                .AllAsNoTracking()

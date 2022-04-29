@@ -21,27 +21,27 @@
     <form method="post" id="bookForm" class="col-md-6 offset-md-3" style="margin-top:5%">
         <div class="form-group">
             <label asp-for="Adult"></label>
-            <input asp-for="Adult" class="form-control" />
+            <input onchange="TotalSum()" asp-for="Adult" class="form-control" id="adult" />
             <span asp-validation-for="Adult" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Children"></label>
-            <input asp-for="Children" class="form-control" />
+            <input asp-for="Children" class="form-control" id="children" />
             <span asp-validation-for="Children" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Infant"></label>
-            <input asp-for="Infant" class="form-control" />
+            <input asp-for="Infant" class="form-control" id="infant" />
             <span asp-validation-for="Infant" class="text-danger"></span>
         </div>
-        @*<input type="hidden" asp-for="TripId" />*@
+        <input id="tripId" type="hidden" asp-for="TripId" />
         <hr />
         <div>
-            Total cost: $
+            Total cost: $<span class="totalSum"></span>
         </div>
     </form>
     <div class="col-md-6 offset-md-3">
-        <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#bookModal">Book now</button>
+        <button type="submit" class="btn btn-success" style="margin-top:3%" data-toggle="modal" data-target="#bookModal">Book now</button>
     </div>
 </div>
 
@@ -57,7 +57,7 @@
             </div>
             <div class="modal-body">
                 <p>
-                    Do you want to book this trip?
+                    Do you want to book this trip for $<span class="totalSum"></span>?
                 </p>
             </div>
             <div class="modal-footer">
@@ -67,3 +67,24 @@
         </div>
     </div>
 </div>
+
+@section Scripts{
+    <script>
+        function TotalSum() {
+            let xhr = new XMLHttpRequest();
+            var tripId = document.getElementById("tripId").value;
+
+            xhr.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var adultsCount = document.getElementById("adult").value;
+                    var sum = Number(this.responseText) * adultsCount;
+
+                    document.getElementsByClassName("totalSum")[0].innerHTML = sum;
+                    document.getElementsByClassName("totalSum")[1].innerHTML = sum;
+                }
+            }
+            xhr.open("GET", "/Bookings/TotalSum/" + tripId);
+            xhr.send();
+        }
+    </script>
+}

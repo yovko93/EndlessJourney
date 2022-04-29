@@ -5,7 +5,9 @@
     using System.Threading.Tasks;
 
     using EndlessJourney.Services.Data.Bookings;
+    using EndlessJourney.Services.Data.Trips;
     using EndlessJourney.Web.ViewModels.Bookings;
+    using EndlessJourney.Web.ViewModels.Trips;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
@@ -15,11 +17,14 @@
     public class BookingsController : Controller
     {
         private readonly IBookingsService bookingsService;
+        private readonly ITripsService tripsService;
 
         public BookingsController(
-            IBookingsService bookingsService)
+            IBookingsService bookingsService,
+            ITripsService tripsService)
         {
             this.bookingsService = bookingsService;
+            this.tripsService = tripsService;
         }
 
         [Authorize]
@@ -73,6 +78,13 @@
             this.TempData[Message] = TripBookedSuccessfully;
 
             return this.RedirectToAction(nameof(this.Mine));
+        }
+
+        public async Task<decimal> TotalSum(string id)
+        {
+            var tripPrice = await this.tripsService.GetTripPriceAsync(id);
+
+            return tripPrice;
         }
     }
 }

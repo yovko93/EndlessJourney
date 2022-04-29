@@ -14,6 +14,8 @@
 
         Task<TModel> GetByIdAsync<TModel>(string id);
 
+        Task<decimal> GetTripPriceAsync(string id);
+
         Task<IEnumerable<TModel>> GetAllActiveAsync<TModel>(int page, int itemsPerPage = 6);
 
         Task<int> GetCountAsync();
