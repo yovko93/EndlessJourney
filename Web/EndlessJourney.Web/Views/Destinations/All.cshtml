@@ -1,4 +1,4 @@
-﻿@model EndlessJourney.Web.ViewModels.Destinations.DestinationsListViewModel
+﻿@model DestinationsListViewModel
 @using static EndlessJourney.Common.GlobalConstants.RolesNamesConstants
 @{
     this.ViewData["Title"] = "All Destinations";
@@ -21,17 +21,78 @@
         </ul>
     </div>
 }
-<div class="row row-cols-1 row-cols-md-2 g-4">
-    @foreach (var destination in this.Model.Destinations)
-    {
-        <div class="col">
-            <div class="card">
-                <img src=@destination.EndPointImageUrl class="card-img-top" height="400" alt=@destination.Name>
-                <div class="card-body">
-                    <h5 class="card-title">@destination.StartPointName to @destination.EndPointName</h5>
-                    <p class="card-text">@destination.Description</p>
-                </div>
+
+<form method="get">
+    <div class="row">
+        <div class="form-group col-md-4">
+            <div class="form-group">
+                <label asp-for="EndPoint"></label>
+                <select asp-for="EndPoint" class="form-control">
+                    <option value="">All</option>
+
+                    @foreach (var endPoint in Model.EndPoints)
+                    {
+                        <option value="@endPoint">@endPoint</option>
+                    }
+                </select>
             </div>
         </div>
+
+        <div class="form-group col-md-4">
+            <label asp-for="SearchTerm"></label>
+            <input asp-for="SearchTerm" class="form-control" placeholder="Liverpool, etc...">
+        </div>
+
+        <div class="form-group col-md-4">
+            <div class="form-group">
+                <label asp-for="Sorting"></label>
+                <select asp-for="Sorting" class="form-control">
+                    <option value="0" selected>Date Created</option>
+                    <option value="1">Start Point</option>
+                    <option value="2">End Point</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</form>
+
+@{ var previousPage = Model.CurrentPage - 1;
+    if (previousPage < 1)
+    {
+        previousPage = 1;
     }
+
+    var maxPage = Math.Ceiling((double)Model.TotalDestinations / EndlessJourney.Web.ViewModels.Destinations.DestinationsListViewModel.DestinationsPerPage);
+}
+
+<div class="row mb-5">
+    <div class="col-md-6">
+        <a class="btn btn-primary @(Model.CurrentPage == 1 ? "disabled" : string.Empty)"
+           asp-controller="Destinations"
+           asp-action="All"
+           asp-route-currentPage="@previousPage"
+           asp-route-endPoint="@Model.EndPoint"
+           asp-route-searchTerm="@Model.SearchTerm"
+           asp-route-sorting="@((int)Model.Sorting)"><<</a>
+    </div>
+
+    @{ var shouldButtonBeDisabled = Model.CurrentPage == maxPage ||
+                                                 !Model.Destinations.Any(); }
+
+    <div class="col-md-6">
+        <a class="btn btn-primary float-sm-right @(shouldButtonBeDisabled ? "disabled" : string.Empty)" style="margin-top: 10px"
+           asp-controller="Destinations"
+           asp-action="All"
+           asp-route-currentPage="@(Model.CurrentPage + 1)"
+           asp-route-endPoint="@Model.EndPoint"
+           asp-route-searchTerm="@Model.SearchTerm"
+           asp-route-sorting="@((int)Model.Sorting)">>></a>
+    </div>
 </div>
+
+@if (!Model.Destinations.Any())
+{
+    <h2 class="text-center">No destinations found by the given criteria!</h2>
+}
+
+<partial name="_DestinationsPartial" model="@Model.Destinations" />

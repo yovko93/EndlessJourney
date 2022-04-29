@@ -1,0 +1,16 @@
+﻿@model IEnumerable<DestinationViewModel>
+
+<div class="row row-cols-1 row-cols-md-2 g-4">
+    @foreach (var destination in this.Model)
+    {
+        <div class="col">
+            <div class="card">
+                <img src=@destination.EndPointImageUrl class="card-img-top" height="400" alt=@destination.Name>
+                <div class="card-body">
+                    <h5 class="card-title">@destination.StartPointName to @destination.EndPointName</h5>
+                    <p class="card-text">@destination.Description</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -50,7 +50,7 @@
             public const int MinimumNameLength = 3;
             public const int MaximumNameLength = 30;
             public const int MinimumDescriptionLength = 10;
-            public const int MaximumDescriptionLength = 200;
+            public const int MaximumDescriptionLength = 300;
         }
 
         public class City
@@ -63,7 +63,7 @@
             public const int MinimumNameLength = 3;
             public const int MaximumNameLength = 30;
             public const int MinimumDescriptionLength = 10;
-            public const int MaximumDescriptionLength = 200;
+            public const int MaximumDescriptionLength = 300;
         }
 
         public class Country

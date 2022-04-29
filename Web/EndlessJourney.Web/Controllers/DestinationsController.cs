@@ -26,14 +26,30 @@
             this.citiesService = citiesService;
         }
 
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All([FromQuery] DestinationsListViewModel query)
         {
-            var viewModel = new DestinationsListViewModel
-            {
-                Destinations = await this.destinationsService.GetAllAsync<DestinationViewModel>(),
-            };
+            //var viewModel = new DestinationsListViewModel
+            //{
+            //    Destinations = await this.destinationsService.GetAllAsync<DestinationViewModel>(),
+            //};
 
-            return this.View(viewModel);
+            //return this.View(viewModel);
+
+            var queryResult = this.destinationsService.All(
+                query.EndPoint,
+                query.SearchTerm,
+                query.Sorting,
+                query.CurrentPage,
+                DestinationsListViewModel.DestinationsPerPage);
+
+            var destinationEndPoints = this.destinationsService.AllEndPoints();
+
+            query.EndPoints = destinationEndPoints;
+
+            query.TotalDestinations = queryResult.TotalDestinations;
+            query.Destinations = queryResult.Destinations;
+
+            return this.View(query);
         }
 
         [Authorize(Roles = AdministratorRoleName)]
