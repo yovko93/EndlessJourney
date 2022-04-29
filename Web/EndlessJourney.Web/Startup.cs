@@ -13,12 +13,13 @@
     using EndlessJourney.Services.Data.Countries;
     using EndlessJourney.Services.Data.Destinations;
     using EndlessJourney.Services.Data.Images;
+    using EndlessJourney.Services.Data.Rooms;
     using EndlessJourney.Services.Data.Ships;
     using EndlessJourney.Services.Data.Trips;
     using EndlessJourney.Services.Mapping;
     using EndlessJourney.Services.Messaging;
     using EndlessJourney.Web.ViewModels;
-
+    using Microsoft.ApplicationInsights.Extensibility.PerfCounterCollector.QuickPulse;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -27,8 +28,6 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
-    using Microsoft.ApplicationInsights.Extensibility.PerfCounterCollector.QuickPulse;
-    using EndlessJourney.Services.Data.Rooms;
 
     public class Startup
     {

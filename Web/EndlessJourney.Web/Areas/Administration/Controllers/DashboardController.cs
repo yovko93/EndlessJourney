@@ -31,12 +31,6 @@
                 dataPoints.Add(new DataPoint(trip.DestinationName, (double)trip.Price));
             }
 
-            //dataPoints.Add(new DataPoint("Micromax", 13));
-            //dataPoints.Add(new DataPoint("Lenovo", 8));
-            //dataPoints.Add(new DataPoint("Intex", 7));
-            //dataPoints.Add(new DataPoint("Reliance", 6.8));
-            //dataPoints.Add(new DataPoint("Others", 40.2));
-
             this.ViewBag.DataPoints = JsonConvert.SerializeObject(dataPoints);
 
             return this.View();
